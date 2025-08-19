@@ -1,0 +1,157 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}	% Para caracteres en español
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{multirow,booktabs}
+\usepackage[table]{xcolor}
+\usepackage{fullpage}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usetikzlibrary{3d}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{calc}
+\usepackage{multicol}
+\usepackage[spanish]{babel}
+\usepackage{cancel}
+\usepackage[retainorgcmds]{IEEEtrantools}
+\usepackage{geometry}
+\usepackage{amsmath}
+\newlength{\tabcont}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\usepackage{empheq}
+\usepackage{framed}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\colorlet{shadecolor}{orange!15}
+\parindent 0in
+\parskip 12pt
+\geometry{margin=1in, headsep=0.25in}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{reg}{Rule}
+\newtheorem{exer}{Exercise}
+\newtheorem{note}{Note}
+\newcommand{\identity}{1\kern-0.25em\text{l}}
+\newcommand{\todoitem}[1]{\item[$\Box$] #1}    % Unchecked box
+\newcommand{\doneitem}[1]{\item[$\CheckedBox$] #1}  % Checked box (from amssymb)
+
+\pagenumbering{arabic}
+
+\title{Colisiones y Te\'oria Cl\'asica de Transporte \\ \small{Notas sobre plasma basado en el Goldston} \cite{goldston1995introduction} }
+\author{Aaron Sanabria Mart\'inez\footnote{aaron.sanabria@ucr.ac.cr}}
+
+\begin{document}
+
+  \maketitle
+  \tableofcontents
+	\thispagestyle{empty}
+  
+  \section{Plasma Parcialmente Ionizados} 
+
+  Los procesos at\'omicos son los encargados de determinar el grado de ionizaci\'on en plasmas parcialmente ionizados. Hay dos procesos de ionizaci\'on que satisfacen la conservaci\'on de momento y energ\'ia. Estos son: (i) ionizaci\'on por impacto; un electr\'on colisiona con un \'atomo lo que resulta en la liberaci\'on de un i\'on y dos electrones, (ii) ionzaci\'on radiativa; un fot\'on con suficiente energ\'ia es absorbido por el at\'omo y este se disocia en un i\'on y un electr\'on.  Por otro lado hay procesos de recombinaci\'on por procesos inversos a los anteriores, (i) recombinaci\'on de tres cuerpos; un i\'on y dos electrones se unen para formar un \'atomo neutro y un electr\'on libre, (ii) recombinaci\'on radiativa; un i\'on se combina con un electr\'on y se emite un fot\'on. 
+
+  En un equilibrio termodin\'amico estricto, se tienen tres casos que diferencian las caracterist\'icas en el nivel de ionizaci\'on de plasmas, plasmas a densidades altas (estelares, o de laboratorio muy densos)
+
+  \begin{itemize}
+    \item $n_i/n_0$ depende de $n_e$ y $T_e$.
+    \item Las part\'iculas y radiaci\'on est\'an lo suficientemente confinadas para que el equilibrio termodin\'amico entre part\'iculas y radiaci\'on se alcancen.
+    \item Equilibrio local si la los procesos de ionizaci\'on y recombinaci\'on por interacci\'on entre part\'iculas domina sobre los procesos radiativos. 
+    \item Part\'iculas del plasma en equilibrio por si mismas. 
+    \item Si la densidad cr\'itica de $10^{22}m^{-3}$ es alcanzada la recombinaci\'on de tres cuerpos domina sobre la radiativa para un temperatura de algunos $eV$.
+  \end{itemize}
+
+  Para el caso de plasmas de baja densidad
+
+  \begin{itemize}
+    \item Recombinaci\'on radiativa domina sobre la de tres cuerpos.
+    \item $n_i/n_0$ depende \'unicamente de $T_e$.
+    \item Se llega a un estado estacionario 'Equilibrio Coronal' cuando ambos procesos de recombinaci\'on est\'an en balanceados.
+    \end{itemize}
+
+  Finalmente en casos de baja densidad donde no se llega al Equilibrio Coronal por en muchos casos por fuentes externas de neutros en el plasma
+
+  \begin{itemize}
+    \item La densidad de neutros se ajusta al balancear ionizaci\'on con la fuente externa de neutros en vez de por recombinaci\'on.
+    \item Densidad de neutros mucho mayor al caso donde hay \'unicamente recombinaci\'on. 
+    \end{itemize}
+
+      En todos los casos a unos pocos $eV$ de temperatura el grado de ionizaci\'on se vuelve grande.
+
+  \subsection{Secciones efectivas, Camino libre medio y Frecuencias de Colisi\'on}
+
+  A modo de introducci\'on de lo que son las secciones eficacez en colisiones usaremos el caso de un electr\'on que colisiona con un \'atomo neutro. Se pueden identificar dos tipos de colisiones en este caso; (i) Colisiones el\'asticas; se conserva la identidad de las part\'iculas, el eletr\'on rebota del \'atomo que se mantiene en el mismo nivel de energ\'ia, (ii) Colisiones inel\'asticas; tal como ionizaci\'on o exitaci\'o. En el primer caso, puede presentarse una perdida de momentum dependiendo del \'angulo de rebote, la probabilidad de esta perdida se puede expresar en t\'erminos de una secci\'on transversal efectiva $\sigma$ que el \'atomo tendr\'ia si absorbiera momentum totalmente. Para el segundo caso, para ionizaci\'on, por ejemplo, la probabilidad de que esto pase se puede representar por una secci\'on transversal efectiva $\sigma$ que el \'atomo tendr\'ia si se ionizara por todos los \'atomos que golpean esta \'area.
+
+  Considerese electrones incidiendo perpendicularmente hacia la secci\'on transversal de una los con una densidad de neutros $n_0$. Los \'atomos son imaginados como esferas de \'area transversal eficaz $\sigma$. Esta \'area obedece a los dos casos mencionados de probabilidad total de uno u otro evento dependiendo del tipo de colisi\'on. El n\'umero de \'atomos por unidad de \'area en la loza es $n_0 dx$ y la fracci\'on del \'area transversal de loza cubierta por \'atomos es $n_0\sigma dx$. Si hay un flujo $\Gamma$ de electrones incidentes, el flujo de electrones que emergen de la loza es i
+
+  \begin{eqnarray*}
+    \Gamma(x + dx) = \Gamma(x) + \frac{d\Gamma(x)}{dx}dx = \Gamma(x)(1 - n_0\sigma dx)\\
+    \implies \frac{d\Gamma(x)}{dx} = -n_0\sigma\Gamma(x) \\
+    \implies \Gamma(x) = \Gamma_0\exp{(-n_0\sigma x)} = \Gamma_0\exp{(-x/\lambda_{mfp})}
+  \end{eqnarray*}
+
+  con 
+
+  \begin{equation}
+    \lambda_{mfp} = (n_0\sigma)^{-1}
+  \end{equation}
+
+  $\lambda_{mfp}$ es el camino libre medio de colisiones. En un $\lambda_{mfp}$ el flujo disminuir\'ia por $1/e$ respecto al flujo incidente $\Gamma_0$. Es la distancia que viaja un electr\'on libremente antes de tener una probabilidad de chocar con un \'atomo. Para electrones con velocidad $v$ el tiempo medio entre colisiones est\'a dado por 
+
+  \begin{equation}
+    \tau = \lambda_{mfp}/v
+  \end{equation}
+
+  Al inverso de esta cantidad se le denomina 'frecuencia de colisi\'on', y se define en t\'erminos de una distribuci\'on de velocidades como
+
+  \begin{equation}
+    \nu = \left<\tau^{-1}\right> = n_0\left<\sigma v\right> = \frac{n_0}{n_e}\int d^2v f_e(v)\sigma(v)v
+  \end{equation}
+
+  \subsection{Grado de ionizaci\'on en Equilibrio Coronal}
+
+  Cuando las colisiones entre neutros y electrones resulta en ionizaci\'on se puede calcular la raz\'on a la cual se producen nuevos electrones por unidad de volumen al multiplicar la frecuencia de colisi\'on de ionizaci\'on de los electrones por la densidad de electrones en el plasma $n_e$. Tal que
+
+  \begin{equation}
+    S_e = n_en_0\left<\sigma_{ion} v_e\right>
+  \end{equation}
+
+  Donde $\sigma_{ion}$ es la secci\'on eficaz para la ionizaci\'on por impacto de electrones. Aqu\'i se asume que $v_e \gg v_0$. B\'asicamente los \'atomos est\'an quietos desde el marco de referencia de los electrones y son los electrones los que generan colisiones, por tanto, $\sigma_{ion}$ depende fuertemente de $v_e$ al menos para energ\'ias de alrededor de $30eV$. 
+
+  Para el caso del Hidr\'ogeno una buena aproximaci\'on para la frecuencia de colisiones est\'a dada por 
+
+  \begin{equation}
+    \left<\sigma_{ion}v_e\right> = \frac{2.0\times 10^{-13}}{6.0 + T_e(eV)/ 13.6}\left(\frac{T_e(eV)}{13.6}\right)^{1/2}\exp{\left(-\frac{-13.6}{T_e(eV)}\right)} \quad [m^{3}s^{-1}]
+  \end{equation}
+
+  El t\'ermino fuente para los neutros est\'a en equilibrio coronal es dado por 
+
+  \begin{equation}
+    S_0 = n_en_0\left<\sigma_{rec}v_e\right>
+  \end{equation}
+
+  donde $\sigma_{rec}$ es la secci\'on eficaz para la recombinaci\'on radiativa. Para un plasma cuasi-neutral de Hidrog\'eno en el regim\'en de temperaturas de inter\'es, una buena aproximaci\'on es 
+
+  \begin{equation}
+    \left<\sigma_{rec}v_e\right> = 0.7\times10^{-19}\left(\frac{13.6}{T_e(eV)}\right)^{1/2} \quad [m^3s^{-1}]
+  \end{equation}
+
+  En el caso de un plasma homogen\'eo de Hidrog\'eno en equilibrio coronal, el grado de ionizaci\'on se da al balancear la raz\'on de generaci\'on de electrones por ionizaci\'on por impacto contra aquella de perdida de electrones por sumidero por recombinaci\'on radiativa. Este concepto de equilibrio coronal \textbf{se puede generalizar a plasmas compuestos o que contienen una mezcla de iones con Z mayores}. En dado caso, dependiendo principalmente en la temperatura electr\'onica, los iones se desprenderan de los elecrones de las capaz externas y retendr\'an algunos electrones ligados en las capaz internas. Esto da paso a una distribuci\'on de equilibrio entro varios estados de ionizaci\'on. 
+
+  La v\'alidez de cualquier modelo de equilibrio coronal depende de la escala temporal en la que se alcanza el balance de ionizaci\'on y recombinaci\'on (tiempo de confinamiento) siendo mucho m\'as corto que la escala temporal  en la cu\'al se introducen o se pierden part\'iculas en el plasma. Si el tiempo de confinamiento empieza a ser comparable con procesos at\'omicos, el balance de ionizaci\'on pasa a estados m\'as bajos de carga. Para plasmas de mayor Z, entran en juego otros procesos como 'recombinaci\'on di\'electrica' en el balance de estados de carga.  
+
+  \subsection{Radiaci\'on}
+  
+  
+
+
+
+
+  \bibliographystyle{IEEEtran}
+  \bibliography{references.bib}
+\end{document}
