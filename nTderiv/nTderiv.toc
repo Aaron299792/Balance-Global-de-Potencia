@@ -1,7 +1,0 @@
-\babel@toc {spanish}{}\relax 
-\contentsline {section}{\numberline {1}Colisiones en el Plasma: Secciones eficaces y frecuencias de colisi\'on}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Conceptos fundamentales de la teor\'ia cin\'etica y transporte en el Plasma}{3}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Difusi\'on de Part\'iculas y energ\'ia en el Plasma}{6}{subsection.1.2}%
-\contentsline {section}{\numberline {2}M\'etodo usado en el art\'iculo (Aproximaciones)}{6}{section.2}%
-\contentsline {section}{\numberline {3}Forma diferencial lineal de la densidad $n = n(T_e)$}{9}{section.3}%
-\contentsline {section}{\numberline {4}Densidad $n = n(T_e)$ en un plasma cuasi-neutral}{10}{section.4}%
