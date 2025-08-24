@@ -1,0 +1,111 @@
+\section{Conceptos fundamentales de la teor\'ia cin\'etica y transporte en el Plasma}
+
+  Los gases ionizados pueden ser espec\'ificados por una funci\'on de distribuci\'on $f_\alpha$(\textbf{r}, \textbf{v}, t). Una derivaci\'on Eur\'istica lleva a la conocida ecuaci\'on cin\'etica\cite{freidberg2014} 
+
+  \begin{equation}\label{eq:k}
+    \frac{df_\alpha}{dt} \equiv \left(\partial_t + \textbf{v}\cdot\nabla + \frac{Z_\alpha e}{m_\alpha}(\textbf{E} + \textbf{v}\times\textbf{B})\cdot \nabla_\textbf{v} \right)f_\alpha = C_\alpha
+  \end{equation}
+
+  \textbf{Esta ecuaci\'on no toma en cuenta fluctuaciones termicas}. Representa densidades suaves promediadas sobre un volumen con un gran n\'umero de part\'iculas. Los campos $\textbf{E}$ y $\textbf{B}$ tambi\'en varian suavemente, no hay fluctuaciones r\'apidas de microcampos y microfuerzas. Dichos efectos se consideran solo en el t\'ermino de colisiones $C_\alpha$.
+
+  Ahora de la mec\'anica est\'istica es posible obtener los momentos de una distribuci\'on, nos interesa el primer y segundo momento\cite{helander2005} de la distribuci\'on definidos como 
+
+  \begin{eqnarray}
+    n_\alpha &=& \int d^3v f_\alpha \label{eq:dens}\\
+    \textbf{u}_{\alpha} &=& \frac{1}{n_\alpha}\int d^3v f_\alpha\textbf{v} \label{eq:vel} \\
+    \textbf{Q}_\alpha &\equiv& \frac{m_\alpha n_\alpha \left<v^2\textbf{v}\right>}{2}\label{eq:heat}
+  \end{eqnarray}
+
+El momento cero en la Ec. \eqref{eq:dens} es la densidad de part\'iculas de una especie en el plasma, i.e., el n\'umero de part\'iculas de una especie por unidad de volumen. El primer momento Ec.\eqref{eq:vel} es la velocidad promedio de las part\'iculas de una especie en el plasma. La Ec.\eqref{eq:heat} es el flujo de energ\'ia. 
+
+  Ahora definimos el flujo de part\'iculas en el plasma como 
+  
+  \begin{equation}
+    \pmb{\Gamma}_\alpha \equiv n_\alpha\textbf{u}_\alpha
+  \end{equation}
+
+  De la ecuaci\'on cin\'etica \eqref{eq:k}, es posible obtener la siguiente ecuaci\'on de continuidad
+
+  \begin{equation}\label{eq:cont}
+    \partial_t n_\alpha + \nabla\cdot\pmb{\Gamma}_\alpha = S_\alpha
+  \end{equation}
+
+  donde $S_\alpha$ son las fuentes y/o sumideros de las part\'iculas $\alpha$. En estado estacionario como sugiere \cite{lechte2002} la Eq. \eqref{eq:cont} se reduce a 
+
+  \begin{eqnarray*}
+    \nabla\cdot\pmb{\Gamma}_\alpha = S_\alpha \\
+    \implies \int_V d^3r\nabla\cdot\pmb{\Gamma}_\alpha = \int_V d^3r S_\alpha\\
+    \implies \oint_{\partial V} \pmb{\Gamma}_\alpha\cdot d\textbf{S} = \int_V d^3r S_\alpha
+  \end{eqnarray*}
+
+  Definimos el flujo radial de part\'iculas como
+
+  \begin{equation}\label{eq:rtpf}
+    \Gamma_n^\alpha \equiv \oint_{\partial V} \pmb{\Gamma}_\alpha \cdot d\textbf{S} = \int_V d^3r S \approx \left<S\right>V
+  \end{equation}
+
+  Como es visible al adentrarse en balances globales, el concepto de promedios superficiales es fundamental. Conocer todos los parametros del plasma en su superficie ser\'a la piedra angular de los modelos que estamos por desarrollar.
+
+  \begin{shaded}
+    \textbf{Promedio Superficial}
+
+    Definimos el promedio de una cantidad vectorial en la superficie como 
+
+    \begin{equation}
+      \left<\pmb{\varDelta}\right>_{\partial V} \equiv \frac{1}{A}\oint_{\partial V}\pmb{\varDelta}\cdot d\textbf{S}
+    \end{equation}
+
+    donde $A$ es el \'area superficial del plasma.
+  \end{shaded}
+
+  de lo anterior, podemos ver que el flujo radial de part\'iculas es simplemente el promedio superficial del flujo de part\'iculas que atraviesan la superficie, i.e., $\Gamma_n^\alpha = A\left<\Gamma_\alpha\right>_{\partial V}$ \cite{dinklage2005}.
+  
+  Ahora a partir de la llamada ecuaci\'on de energ\'ia \cite{helander2005} derivada de la Eq. \eqref{eq:k} se tiene que
+
+  \begin{equation}\label{eq:energy}
+    \frac{\partial}{\partial t}\left(\frac{3n_\alpha T_\alpha}{2} + \frac{m_\alpha n_\alpha u_\alpha^2}{2}\right) + \nabla\cdot\textbf{Q} = Z_\alpha e n_\alpha \textbf{E}\cdot\textbf{u}_\alpha + \int d^3v\frac{mv^2}{2}C_\alpha
+  \end{equation} 
+
+  En el lado izquierda de la Ec.\eqref{eq:energy} el primer t\'ermino corresponde al calentamiento de Joule en el plasma, para explicar el segundo se debe introducir los siguientes t\'erminos
+
+  \begin{eqnarray}
+    \textbf{w}_\alpha &\equiv& \textbf{v} - \textbf{u}_\alpha \nonumber\\
+    \textbf{R}_\alpha &\equiv& \int d^3v m_\alpha\textbf{v}C_\alpha \nonumber\\
+    \mathcal{Q}_\alpha &\equiv& \int d^3v \frac{mw_\alpha^2}{2}C_\alpha \nonumber\\
+    \frac{3}{2}T_\alpha &\equiv& \left<\frac{m_\alpha w^2}{2}\right> \label{eq:temp}
+  \end{eqnarray}
+
+  Cada una de ellas corresponde a:
+  \begin{itemize}
+    \item $\textbf{w}_\alpha$ : desviaci\'on de la velocidad de la part\'icula de la velocidad promedio, i.e., velocidad por movimiento aleatorio. Cumple que $\left<\textbf{w}_\alpha\right> = \textbf{0}$.
+    \item $\textbf{R}_\alpha$ : fuerza ejercida en la part\'icula como resultado de la colisi\'on con otras especies en el plasma.
+    \item $\mathcal{Q}_\alpha$ : raz\'on de la energ\'ia t\'ermica transferida por colisiones con otras especies. 
+  \end{itemize}
+
+  El segundo t\'ermino en el lado izquierdo de la Ec.\eqref{eq:energy} es entonces, \textbf{la energ\'ia total transferida} por colisiones con otras especies.
+
+  \begin{equation}
+     \int d^3v \frac{m_\alpha v^2}{2}C_\alpha = \mathcal{Q}_\alpha + \textbf{R}_\alpha\cdot\textbf{u}_\alpha
+  \end{equation}
+
+  Aqu\'i el t\'ermino $\textbf{R}_\alpha\cdot\textbf{u}_\alpha$ corresponde al trabajo por unidad de tiempo realizado por la fuerza $\textbf{R}_\alpha$.
+
+  B\'asicamente el lado izquierdo de la ecuaci\'on es la potencia debido al calentamiento de Joule o por colisiones con otras part\'iculas. En el caso estacionario la Ec. \eqref{eq:energy} se vuelve
+
+  \begin{eqnarray}
+  \nabla\cdot\textbf{Q} = \mathcal{Q}_\alpha + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha \nonumber\\
+    \int_V d^3r \nabla\cdot\textbf{Q} = \mathcal{Q}_\alpha + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha\nonumber\\
+    \oint_{\partial V} \textbf{Q}\cdot d\textbf{S} = \int_V d^3r\left[\mathcal{Q}_\alpha + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha\right] \nonumber
+    \end{eqnarray}
+
+    Finalmente llegamos a la siguiente expresi\'on al definir el flujo radial de energ\'ia $\Gamma_E \equiv \oint_{\partial V} \textbf{Q}\cdot d\textbf{S}$ y $Q \equiv \mathcal{Q}_\alpha + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha$.
+
+    \begin{equation}
+      \Gamma_E = \int_Vd^3r Q \approx \left<Q\right>V
+    \end{equation}
+
+   Trabajaremos con estas definiciones m\'as adelante.
+
+   \input{kineticTheory/calentamientoPlasmas}
+
+   \input{kineticTheory/radialTransport}

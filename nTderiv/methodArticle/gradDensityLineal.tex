@@ -1,0 +1,38 @@
+\subsection{Forma diferencial lineal de la densidad $n = n(T_e)$}
+  Nos interesa el caso menos aproximado en particular deshacernos de la aproximaci\'on de los gradientes. Ac\'a nos desharemos de la aproximaci\'on $\nabla n /n \approx \nabla T /T$. Nuevamente asumimos cuasi-neutralidad y un plasma fr\'io, i.e., $n = n_e \approx n_i$ y $n_0 \gg n$. Retomando nuevamete la ecuaci\'on \eqref{eq:8} e igualando a la ecuaci\'on \eqref{eq:9}, adem\'as de reemplazar los $N_p$
+
+  \begin{eqnarray*}
+    -A\left(n\chi\nabla T_e + \frac{3}{2}\alpha T_e D\nabla n\right) = \\ P_{rf} - V\left(E_{ion}\left<\sigma v\right>_{ion}nn_0 + E_{ion_2}\left<\sigma v\right>_{ion_2}n^2 + \frac{3}{2}T_e\left<\sigma v\right>_{rec}n^2 + E_{rad}^0\left<\sigma v\right>_{rad}^{0/i}n n_{0/i} + Q_{ei}\right) 
+  \end{eqnarray*}
+
+  Nuevamente dividimos ambos lados de la ecuaci\'on por $n_0 V$ y descartamos los t\'erminos $n/n_0$ como lo hicimos en la secci\'on anterior de all\'i obtenemos
+
+  \begin{eqnarray*}
+    -\frac{A}{V}\left(\frac{3}{2}\alpha T_e D\frac{\nabla n}{n_0}\right) = \\ \frac{P_{rf}}{n_0V} - \left(E_{ion}\left<\sigma v\right>_{ion} + E_{rad}^0\left<\sigma v\right>_{rad}^{0}\right)n \\
+    \implies \frac{A}{V}\left(\frac{3}{2}\alpha T_e D\frac{\nabla n}{n_0}\right) - \left(E_{ion}\left<\sigma v\right>_{ion} + E_{rad}^0\left<\sigma v\right>_{rad}^{0  }\right)n = -\frac{P_{rf}}{n_0V}
+    \end{eqnarray*}
+ 
+    De all\'i obtenemos la ecuaci\'on diferencial parcial en $n$ de 
+
+    \begin{equation}
+      \nabla n - \frac{2}{3}\frac{n_0 V}{\alpha AD}\left(  E_{ion}\left<\sigma v\right>_{ion} + E_{rad}^0\left<\sigma v\right>_{rad}^0\right)\frac{n}{T_e} = - \frac{2}{3}\frac{P_{rf}}{\alpha AD}\frac{1}{T_e}
+    \end{equation}
+
+  Nos interesa la informaci\'on que podemos sacar de est\'a ecuaci\'on. Tambi\'en vale la pena considerar que esto tambi\'en obedece al caso en que $\nabla T_e$ no cambia de forma abrupta a lo largo del plasma ya que de ser as\'i habr\'ia que considerar el t\'ermino que contiene $\nabla T_e$. En resumen este nuevo modelo se da bajo los siguientes supuestos:
+
+  \begin{itemize}
+    \item Plasma cuasi-neutro: $n = n_e \approx n_i$.
+    \item La temperatura en los bordes es una fracci\'on de la temperatura del volumen: $T_e(a) = \alpha T_e$ con $\alpha \in [0,1]$
+    \item Plasma fr\'io: $n \ll n_0$.
+    \item Temperatura i\'onica baja: $T_i \ll T_e$.
+    \item La temperatura cambia de forma continua y suave a lo largo del plasma: $\nabla T_e \cdot \frac{n}{n_0} \ll 1$
+  \end{itemize}
+
+  Este modelo tambi\'en depende de cuatro par\'ametros los cuales son: $P_{rf}$, $V$, $n_0$ y $\alpha\varUpsilon$ donde $\varUpsilon \equiv A D$. Pese a que este modelo se da en t\'erminos de una expresi\'on diferencial sigue siendo un modelo relativamente f\'acil de manejar debido a la linealidad de la expresi\'on. 
+
+  La expresi\'on final queda como 
+
+  \begin{equation}
+    \nabla n - \frac{2}{3}\frac{n_0 V}{\alpha \varUpsilon}\left(  E_{ion}\left<\sigma v\right>_{ion}(T_e) + E_{rad}^0\left<\sigma v\right>_{rad}^0(T_e)\right)\frac{n}{T_e} = - \frac{2}{3}\frac{P_{rf}}{\alpha \varUpsilon}\frac{1}{T_e}
+  \end{equation}
+  Podemos tomar la complejidad del problema un paso m\'as adelante lo que haremos en la siguiente secci\'on.

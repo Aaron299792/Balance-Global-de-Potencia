@@ -1,0 +1,127 @@
+\section{M\'etodo usado en el art\'iculo (Aproximaciones)}
+
+  Se definen las siguientes expresiones correspondientes a procesos at\'omicos en el Plasma:
+
+  \begin{itemize}
+    \item $N_{ion}$: N\'umero de ionizaciones por unidad $s\cdot m^3$.
+    \item $N_{ion_2}$: N\'umero de segundas ionizaciones por unidad $s\cdot m^3$.
+    \item $N_{rec}$: N\'umero de recombinaciones por unidad $s\cdot m^3$.
+    \item $N_{rad}$: N\'umero de exitaciones por unidad $s\cdot m^3$.
+    \item $Q_{ei}$: Densidad de potencia tranferida a los iones.
+    \item $E_{ion}$: Energ\'ia de ionizaci\'on.
+    \item $E_{rec}$: Energ\'ia cin\'etica de un electr\'on.
+    \item $E_{rad}$: Promedio sobre todas las energ\'ias de radiaci\'on.
+  \end{itemize}
+
+  Las fuentes y sumideros de potencia relacionados a diferentes procesos est\'an dados por $Q_p = N_pE_p$. Las cantidades f\'isicas se definen matem\'aticamente como:
+
+  \begin{eqnarray}
+    N_{ion} &=& \left<\sigma v\right>_{ion}n_en_0\\
+    N_{ion_2} &=& \left<\sigma v\right>_{ion_2}n_en_i\\
+    N_{rec} &=& \left<\sigma v\right>_{rec}n_en_i\\
+    N_{rad}^{0/i} &=& \left<\sigma v\right>_{rad}^{0/i}n_en_{0/i}\\
+    Q_{ei} &=& n_e\frac{\frac{3}{2}(T_e - T_i)}{\tau^{ei}} \label{eq:Qei} \\
+    E_{rec} &=& \frac{3}{2}T_e
+  \end{eqnarray}
+
+  En este caso $n_x$ son las densidades de part\'iculas de las correspondientes especies que hay en el plasma $x \in {i,e,0}$. Adem\'as, $e$, $i$, $0$ corresponden a electrones, iones y part\'iculas neutras respectivamente. La cantidad $\tau_{ei}$ es el tiempo de relajaci\'on para iones cargados simplemente y est\'a aproximado por:
+
+  \begin{equation}\label{eq:tau}
+    \tau_{ei} = \left(\frac{4\pi\epsilon_0}{e^2}\right)^2\frac{3m_iT_e^{3/2}}{8\sqrt{2\pi m_e}n_i\ln{\Lambda}}
+  \end{equation}
+
+  El trasporte radial en el plasma en equilibrio est\'a dado por:
+
+  \begin{itemize}
+    \item $\Gamma_n$: Transporte radial debido a fuentes y sumideros de part\'iculas.
+    \item $\Gamma_E$: Transporte radial debido a fuentes y sumideros de energ\'ia electr\'onica.
+  \end{itemize}
+
+  Del balance de potencias por part\'iculas se tiene que
+
+  \begin{equation}\label{eq:7}
+    \Gamma_n = V(N_{ion} - N_{rec})
+  \end{equation}
+
+  \textbf{Las part\'iculas creadas por ionizaci\'on son ya sea recombinadas o trasportadas a las paredes}. De la te\'oria cl\'asica de trasporte se puede estimar este flujo como:
+
+  \begin{equation}\label{eq:Gamma_n}
+    \Gamma_n = -AD\nabla n
+  \end{equation}
+
+  Donde $A$ el \'area superficial estimada y $D$ la difusividad de part\'iculas en el plasma. El flujo total de potencia se balancea con fuentes y sumideros y se obtiene que 
+  \begin{equation}\label{eq:8}
+    \Gamma_E = P_{rf} - V(E_{ion}N_{ion} + E_{ion_2}N_{ion_2} + E_{rec}N_{rec} + E_{rad}^{0/i}N_{rad}^{0/i} + Q_{ei})
+  \end{equation}
+
+  Nuevamente de la teor\'ia cl\'asica de transporte se tiene que el flujo de potencia por energ\'ia est\'a dado por
+
+  \begin{equation}\label{eq:9}
+    \Gamma_E = -An_e\chi\nabla T_e + \frac{3}{2}\alpha T_e\Gamma_n
+  \end{equation}
+
+  donde $\chi$ es el coeficiente de difusividad de calor. Adem\'as esto asume que \textbf{la temperatura en la frontera del plasma es una fracci\'on de la temperatura del volumen}, i.e., $T_e(a) = \alpha T_e$ con $\alpha \in [0,1]$.
+  
+  Vamos a asumir lo siguiente para el caso f\'isico a estudiar:
+
+  \begin{itemize}
+    \item $T_i \ll T_e$: Temperatura i\'onica despreciable.
+    \item $n_i \approx n_e = n$: Quasi-neutralidad del plasma.
+    \item $n_0 \gg n$: Plasma parcialmente ionizado (Plasma frio).
+    \item $\nabla T/ T \approx \nabla n / n$: Escala de cambio en los gradientes de densidad y temperatura similares.
+  \end{itemize}
+  
+  Tomando la \eqref{eq:7} y reemplazando en \eqref{eq:9} se obtiene 
+
+  \begin{equation}
+    \Gamma_E = -A\chi n \nabla T_e - \frac{3}{2}\alpha ADT_e\nabla n
+  \end{equation}
+
+  Del \'utimo supuesto $n \nabla T_e \approx T_e \nabla n$ usando esto
+
+  \begin{eqnarray}\label{eq:11}
+    \Gamma_E &=& \left(\frac{3}{2}\alpha + \frac{\chi}{D}\right)(-AD\nabla n)T_e \nonumber \\
+             &=& \left(\frac{3}{2}\alpha + \gamma\right)\Gamma_n T_e
+  \end{eqnarray}
+
+  Donde se define el parametro $\gamma = \chi/D$. Ahora usando el pen\'ultimo supuesto y despreciando los t\'erminos $n/n_0 \ll 1$ obtendremos una ecuaci\'on $n = n(T_e)$ multiplicando la ecuaci\'on \eqref{eq:11} por un factor de $1/n_0 V$ y reemplazando los respectivos $N_p$
+
+  \begin{eqnarray*}
+    \frac{\Gamma_E}{n_0V} &=& \small{\frac{P_{rf}}{n_0V} - \left(E_{ion}\frac{\left<\sigma v\right>_{ion} nn_0 }{n_0 } +\cancel{E_{ion_2}\left<\sigma v\right>_{ion_2} n \frac{n}{n_0} } + E_{rad}^{0/i}\left<\sigma v\right>_{rad}^{0/i}n \frac{n_{0/i}}{n_0} + \cancel{\frac{3}{2}T_e\left<\sigma v\right>_{rec}n \frac{n}{n_0} } + \frac{Q_{ei}}{n_0} \right)} \nonumber\\
+                          &=& \frac{P_{rf}}{n_0V} -n \left(E_{ion}\left<\sigma v\right>_{ion} + E_{rad}^0\left<\sigma v\right>_{rad}^0 + \frac{Q_{ei}}{n_0}\right) 
+  \end{eqnarray*}
+
+  Ahora como $\tau_{ei} \propto n_i^{-1}$ y $Q_{ei} \propto \tau_{ei}^{-1}$ se tiene que $Q_{ei} \propto n_i$ lo que implica que $Q_{ei}/n_0 \propto n_i/n_0 \rightarrow 0$
+  
+  Por tanto se obtiene
+  
+  \begin{equation}\label{eq:8dev}
+    \frac{\Gamma_{E}}{n_0V} \approx \frac{P_{rf}}{n_0V} -n (E_{ion}\left<\sigma v\right>_{ion} + E_{rad}^0\left<\sigma v\right>_{rad}^0)
+  \end{equation}
+
+  De forma similar se procede con la ecuaci\'on \eqref{eq:11} y reemplazando $\Gamma_n$ por la ecuaci\'ion \eqref{eq:7}
+
+  \begin{eqnarray}\label{eq:11dev}
+    \frac{\Gamma_E}{n_0 V} &=& \frac{1}{n_0V} \left(\gamma + \frac{3}{2}\alpha\right)V(N_{ion} - N_{rec})T_e \nonumber\\
+                           &=& \left(\gamma + \frac{3}{2}\alpha\right)nT_e \left(\left<\sigma v\right>_{ion}\frac{n_0}{n_0} - \cancel{\left<\sigma v\right>_{rec}\frac{n}{n_0}}\right) \nonumber \\
+                           &=& \left(\gamma + \frac{3}{2}\alpha\right)\left<\sigma v\right>_{ion}nT_e
+  \end{eqnarray}
+
+  Ahora igualamos las ecuaciones \eqref{eq:8dev} y \eqref{eq:11dev} y despejamos $n$
+
+  \begin{eqnarray*}
+    \frac{P_{rf}}{n_0V} -n (E_{ion}\left<\sigma v\right>_{ion} + E_{rad}^0\left<\sigma v\right>_{rad}^0) = \left(\gamma + \frac{3}{2}\alpha\right)\left<\sigma v\right>_{ion}nT_e \\ \implies \frac{P_{rf}}{n_0V} = n \left[\left(\gamma + \frac{3}{2}\alpha\right)\left<\sigma v\right>_{ion}T_e + E_{ion}\left<\sigma v\right>_{ion} + E_{rad}^0\left<\sigma v\right>_{rad}^0\right] \\
+    \implies \frac{ P_{rf} }{n_0V} = n \left\{ \left[ \left(\gamma + \frac{3}{2}\alpha\right)T_e + E_{ion}\right] \left<\sigma v\right>_{ion} + E_{rad}^0\left<\sigma v\right>_{rad}^0 \right\}
+  \end{eqnarray*}
+
+  Finalmente se despeja $n$
+
+  \begin{equation}
+    n(T_e; P_{rf}, n_0, V, \gamma, \alpha) = \frac{P_{rf}/n_0V}{\left[ \left(\gamma + \frac{3}{2}\alpha\right)T_e + E_{ion}\right] \left<\sigma v\right>_{ion}(T_e) + E_{rad}^0\left<\sigma v\right>_{rad}^0(T_e)}
+  \end{equation}
+
+  Esta expresi\'on es la que se obtiene por \cite{lechte2002}.
+
+  \input{methodArticle/gradDensityLineal}
+  
+  \input{methodArticle/gradDensityNL}
