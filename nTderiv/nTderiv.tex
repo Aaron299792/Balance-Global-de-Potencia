@@ -5,6 +5,8 @@
 \usepackage{multirow,booktabs}
 \usepackage[table]{xcolor}
 \usepackage{fullpage}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing}
 \usepackage{lastpage}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
@@ -16,7 +18,7 @@
 \usepackage{hyperref}
 \usepackage{calc}
 \usepackage{multicol}
-\usepackage[spanish]{babel}
+%\usepackage[spanish]{babel}
 \usepackage{cancel}
 \usepackage[retainorgcmds]{IEEEtrantools}
 \usepackage{geometry}
@@ -26,6 +28,7 @@
 \setlength{\parskip}{0.05in}
 \usepackage{empheq}
 \usepackage{framed}
+\usepackage{caption,subcaption}
 \usepackage[most]{tcolorbox}
 \usepackage{xcolor}
 \colorlet{shadecolor}{orange!15}
@@ -60,14 +63,55 @@
 
     Sea $n_0$ la densidad de neutros que hay en un plasma, se define el camino libre medio $\lambda_{mfp}$ como el recorrido promedio que tendr\'a el electr\'on antes de tener una probabilidad de colisionar con otro neutro \cite{goldston1995}. 
 
-    Introduciremos un simple ejemplo en el caso 1D de forma ilustrativa. Imaginese un loza de grueso $dx$ con neutros, la cantidad de estos por unidad de \'area es de $n_0dx$ y el \'area que ocupan en la loza es de $n_0 \sigma dx$. Hacia la loza hay un flujo de electrones perpendicular al \'area transversal de la loza, este flujo incidente los llamaremos $\Gamma(x)$, ya que consideramos los neutro como esferas rígidas de secci\'on efectiva, si un electr\'on colisiona con un neutro habr\'a ionizaci\'on por lo qque el flujo de electrones no es el mismo que sale, el flujo de electrones que no colisiona con los neutros est\'a dado por $\Gamma + d\Gamma = \Gamma(1 - n_0\sigma dx)$ De esto se obtiene que, el cambio de $\Gamma$ con la distancia $x$ est\'a dada por 
+    Introduciremos un simple ejemplo en el caso 1D de forma ilustrativa. Imaginese un loza de grueso $dx$ con neutros, ve\'ase la figura abajo. La cantidad de estos por unidad de \'area es de $n_0dx$ y el \'area que ocupan en la loza es de $n_0 \sigma dx$. 
+
+    \begin{figure}[hbt!]
+ 		\label{fig:slabdx}
+ 		\centering
+ 		\begin{tikzpicture}
+ 			\draw (0,0) -- (0,2);
+ 			\draw (1,-0.5) rectangle (1.75,1.5);
+ 			\draw (0,0) -- (1,-0.5);
+ 			\draw (0,2) -- (1,1.5);
+ 			\draw (0,2) -- (0.75,2);
+ 			\draw (0.75,2) -- (1.75,1.5);
+ 			\fill (1.4,-0.15) circle (0.125);
+ 			\fill (1.4,1.15) circle (0.125);
+ 			\fill (1.25,0.3) circle (0.125);
+ 			\fill (1.55,0.7) circle (0.125);
+ 			\fill (1.1, 1.625) circle (0.125);
+ 			\fill (0.7, 1.825) circle (0.125);
+ 			\fill (0.3,0.25) circle (0.125);
+ 			\fill (0.2,0.7) circle (0.125);
+ 			\fill (0.35,1.25) circle (0.125);
+ 			\fill (0.75,0.1) circle (0.125);
+ 			\fill (0.75,0.85) circle (0.125);
+ 			\fill (0.85,1.3) circle (0.125);
+ 			\draw (-1.25,1.4) circle (0.2);
+ 			\node at (-1.23,1.4) {-};
+ 			\draw (-1.25,0.4) circle (0.2);
+      \draw[->, thick] (-1.0, 0.4) -- (-0.3,0.4);
+      \draw[->, thick] (-1.0, 1.4) -- (-0.3,1.4);
+      \node at (-1.23,0.4) {-};
+ 			\draw[->, thick] (-1.0, 0.4) -- (-0.3,0.4);
+  		\node at (1.45,-0.65) {dx};
+  		\node at (-0.75,1.85) {$_\Gamma$};
+  		\draw[->, thick] (1.85, 0.7) -- (2.5,0.7);
+  		\draw (2.75,0.7) circle (0.2);
+  		\node at (2.75, 0.7) {-};
+  		\node at (2.65, 1.2) {$_{\Gamma(1 - n_0\sigma dx)}$};
+ 		\end{tikzpicture}
+ 		\caption{Flujo de electrones $\Gamma$ incidente sobre una loza de grosor $dx$ que contiene una densidad de neutros $n_0$.}
+ 	\end{figure}
+
+    Hacia la loza hay un flujo de electrones perpendicular al \'area transversal de la loza, este flujo incidente los llamaremos $\Gamma(x)$, ya que consideramos los neutro como esferas r\'igidas de secci\'on efectiva, si un electr\'on colisiona con un neutro habr\'a ionizaci\'on por lo qque el flujo de electrones no es el mismo que sale, el flujo de electrones que no colisiona con los neutros est\'a dado por $\Gamma + d\Gamma = \Gamma(1 - n_0\sigma dx)$ De esto se obtiene que, el cambio de $\Gamma$ con la distancia $x$ est\'a dada por 
 
     \begin{eqnarray}
       \frac{d\Gamma}{dx} &=& -n_0\sigma \nonumber\\
       \implies \Gamma(x) &=& \Gamma_0\exp{(-n_0\sigma x)} \nonumber
     \end{eqnarray}
   
-    N\'otese que $n_0\sigma$ tiene unidades de $m^{-1}$, se define $\lambda_{mfp} = (n_0\sigma)^{-1}$ como el camino libre, trayecto recorrido a partir del cual existe una probabilidad razonable de colision con un neutro \cite{goldston1995}. Para los casos de interés existe un $\lambda_{mfp}$ cuantitativamente distinto al de este caso, pero la definici\'on cualitativa es la misma.
+    N\'otese que $n_0\sigma$ tiene unidades de $m^{-1}$, se define $\lambda_{mfp} = (n_0\sigma)^{-1}$ como el camino libre, trayecto recorrido a partir del cual existe una probabilidad razonable de colision con un neutro \cite{goldston1995}. Para los casos de inter\'es existe un $\lambda_{mfp}$ cuantitativamente distinto al de este caso, pero la definici\'on cualitativa es la misma.
 
   Para electrones con velocidad $v$ el tiempo medio entre colisiones es
 
@@ -98,7 +142,51 @@
   \item Recombinaci\'on radiativa: un electr\'on interact\'ua con un i\'on y se obtiene un neutro o un i\'on de mayor $Z_\alpha$ adem\'as de la emisi\'on de un fot\'on.
   \item Exitaci\'on: Debido a colisi\'on se transfiere energ\'ia al neutro o i\'on en ese proceso se irradia la energ\'ia de exitaci\'on mediante ondas electromagn\'eticas. En este caso siempre se pierde energ\'ia solamente.
   \item Colisiones de Coulomb: Son el\'asticas, los electrones calientes le transfieren momento a iones frios mediante interacciones el\'asticas de Coulomb.
-  \end{itemize}  
+  \end{itemize} 
+
+  \begin{figure}[h!]
+    \label{fig:coll}
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+	    \centering
+      \resizebox{0.8\textwidth}{!}{
+	    \begin{tikzpicture}
+		    \node at (-0.49,-0.5) {-};
+		    \node at (1.86,0.45) {-};
+		    \node at (1.86,-0.45) {-};
+		    \node at (1.25,0.0) {+};
+		    \draw (-0.5,-0.5) circle (0.1);
+		    \draw[->] (-0.4, -0.4) -- ( -0.15 , -0.15);
+		    \fill     (0 , 0) circle (0.2);
+		    \draw [->, thick] (0.25, 0.0) -- (1.0,0.0);
+		    \draw (1.25, 0.0) circle (0.2);
+		    \draw[->] (1.5, 0.1) -- (1.75, 0.35);
+		    \draw[->] (1.5, -0.1) -- (1.75, -0.35);
+		    \draw (1.85, 0.45) circle (0.1);
+		    \draw (1.85, -0.45) circle (0.1);
+	    \end{tikzpicture}
+      }
+	    \caption{}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+	    \centering
+        \resizebox{0.8\textwidth}{!}{
+ 	      \begin{tikzpicture}
+		      \node at (-0.49,-0.5) {-};
+		      \node at (0.0,0.0) {+};
+		      \draw (-0.5,-0.5) circle (0.1);
+		      \draw[->] (-0.4, -0.4) -- ( -0.15 , -0.15);
+		      \draw (0 , 0) circle (0.2);
+		      \draw [->, thick] (0.25, 0.0) -- (1.0,0.0);
+		      \fill (1.25, 0.0) circle (0.2);
+		      \draw[->, decorate, decoration={snake, amplitude=1.2mm, segment length=2.5mm}] (1.25,0.25) -- (1.25,0.75);
+		      \node at (1.30,0.90) {fot\'on};
+      \end{tikzpicture}
+      }
+	    \caption{}
+    \end{subfigure}
+    \caption{Diagrama de colisiones en un plasma (a) ionizaci\'on/recombinaci\'on por colisi\'on entre especies. (b) recombinaci\'on/ionizaci\'on por procesos radiativos. N\'otese que se las flechas son invertibles para obtener los procesos inversos }
+  \end{figure}
 
   \subsection{Conceptos fundamentales de la teor\'ia cin\'etica y transporte en el Plasma}
 
@@ -115,7 +203,7 @@
   \begin{eqnarray}
     n_\alpha &=& \int d^3v f_\alpha \label{eq:dens}\\
     \textbf{u}_{\alpha} &=& \frac{1}{n_\alpha}\int d^3v f_\alpha\textbf{v} \label{eq:vel} \\
-    \textbf{Q}_\alpha &\equiv& \frac{m_\alpha n_\alpha \left<v^2\textbf{v}\right>}{2}
+    \textbf{Q}_\alpha &\equiv& \frac{m_\alpha n_\alpha \left<v^2\textbf{v}\right>}{2}\label{eq:heat}
   \end{eqnarray}
 
 El momento cero en la Ec. \eqref{eq:dens} es la densidad de part\'iculas de una especie en el plasma, i.e., el n\'umero de part\'iculas de una especie por unidad de volumen. El primer momento Ec.\eqref{eq:vel} es la velocidad promedio de las part\'iculas de una especie en el plasma. La Ec.\eqref{eq:heat} es el flujo de energ\'ia. 
@@ -210,7 +298,7 @@ El momento cero en la Ec. \eqref{eq:dens} es la densidad de part\'iculas de una 
 
   \subsection{Procesos de calentemiento en el Plasma}
 
-  Hasta el momento no se han hecho muchas consideraciones sobre el Plasma con el que se esta trabajando. Ahora para el modelo en estudio imponemos la condici\'on de un confinamiento en el r\'egimen de transporte cl\'asico. Esto es, los flujos de part\'iculas y energía obdecen la ley de Fick's es decir los flujos de part\'iculas y energ\'ia pueden ser descritos mediante los gradientes de densidad $n_\alpha$ y temperatura $T_\alpha$ en casos donde el campo $\textbf{B}$ es uniforme.
+  Hasta el momento no se han hecho muchas consideraciones sobre el Plasma con el que se esta trabajando. Ahora para el modelo en estudio imponemos la condici\'on de un confinamiento en el r\'egimen de transporte cl\'asico. Esto es, los flujos de part\'iculas y energ\'ia obdecen la ley de Fick's es decir los flujos de part\'iculas y energ\'ia pueden ser descritos mediante los gradientes de densidad $n_\alpha$ y temperatura $T_\alpha$ en casos donde el campo $\textbf{B}$ es uniforme.
 
   Por lo pronto dejaremos de lado los sub\'indices. Retomemos el estudio de la cantidad $\textbf{Q}$ que estudiamos en la secci\'on anterior, y añadamos las siguientes definiciones
 
@@ -393,7 +481,7 @@ Ahora bien, para un transporte en el cual la velocidad del flujo $\textbf{u}$ su
   Donde se define el parametro $\gamma = \chi/D$. Ahora usando el pen\'ultimo supuesto y despreciando los t\'erminos $n/n_0 \ll 1$ obtendremos una ecuaci\'on $n = n(T_e)$ multiplicando la ecuaci\'on \eqref{eq:11} por un factor de $1/n_0 V$ y reemplazando los respectivos $N_p$
 
   \begin{eqnarray*}
-    \frac{\Gamma_E}{n_0V} &=& \frac{P_{rf}}{n_0V} - \left(E_{ion}\frac{\left<\sigma v\right>_{ion} nn_0 }{n_0 } +\cancel{E_{ion_2}\left<\sigma v\right>_{ion_2} n \frac{n}{n_0} } + E_{rad}^{0/i}\left<\sigma v\right>_{rad}^{0/i}n \frac{n_{0/i}}{n_0} + \cancel{\frac{3}{2}T_e\left<\sigma v\right>_{rec}n \frac{n}{n_0} } + \frac{Q_{ei}}{n_0} \right) \nonumber\\
+    \frac{\Gamma_E}{n_0V} &=& \small{\frac{P_{rf}}{n_0V} - \left(E_{ion}\frac{\left<\sigma v\right>_{ion} nn_0 }{n_0 } +\cancel{E_{ion_2}\left<\sigma v\right>_{ion_2} n \frac{n}{n_0} } + E_{rad}^{0/i}\left<\sigma v\right>_{rad}^{0/i}n \frac{n_{0/i}}{n_0} + \cancel{\frac{3}{2}T_e\left<\sigma v\right>_{rec}n \frac{n}{n_0} } + \frac{Q_{ei}}{n_0} \right)} \nonumber\\
                           &=& \frac{P_{rf}}{n_0V} -n \left(E_{ion}\left<\sigma v\right>_{ion} + E_{rad}^0\left<\sigma v\right>_{rad}^0 + \frac{Q_{ei}}{n_0}\right) 
   \end{eqnarray*}
 
