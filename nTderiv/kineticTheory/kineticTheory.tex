@@ -10,15 +10,15 @@ Los gases ionizados pueden ser espec\'ificados por una funci\'on de distribuci\'
     \frac{df_\alpha}{dt} \equiv \left(\partial_t + \textbf{v}\cdot\nabla + \frac{Z_\alpha e}{m_\alpha}(\textbf{E} + \textbf{v}\times\textbf{B})\cdot \nabla_\textbf{v} \right)f_\alpha = C_\alpha
   \end{equation}
 
-  \textbf{Esta ecuaci\'on no toma en cuenta fluctuaciones termicas}; es decir, a pesar de no conocer cada part\'icula del sistema por lo que se debe modelar como un conjunto de variables aleatorias, asumimos un n\'umero de part\'iculas lo suficientemente grande para que la varianza entre las cantidades macrosc\'opicas sea negligible y tengamos propiedades f\'isicas bien definidas como Temperatura y presi\'on. La funci\'on de distribuci\'on representa densidades suaves promediadas sobre un elemento de volumen. Los campos $\textbf{E}$ y $\textbf{B}$ tambi\'en varian suavemente, no hay fluctuaciones r\'apidas de microcampos y microfuerzas, es decir, se toma el promedio de esos campos cuyas interacciones son de largo alcance. Los efectos de interacciones a corto alcance se consideran solo en el t\'ermino de colisiones $C_\alpha$ asumiendo \'unicamente colisiones binarias.
+  \textbf{Esta ecuaci\'on no toma en cuenta fluctuaciones termicas}; es decir, a pesar de no conocer la din\'amica de cada part\'icula del sistema, por lo que se debe modelar en base a un conjunto de variables aleatorias, asumimos un n\'umero de part\'iculas lo suficientemente grande para que la varianza entre las cantidades macrosc\'opicas sea negligible y tengamos propiedades f\'isicas bien definidas como temperatura y presi\'on. La funci\'on de distribuci\'on representa densidades suaves promediadas sobre un elemento de volumen. Los campos $\textbf{E}$ y $\textbf{B}$ tambi\'en varian suavemente, no hay fluctuaciones r\'apidas de microcampos y microfuerzas, es decir, se toma el promedio de esos campos cuyas interacciones son de largo alcance. Los efectos de interacciones a corto alcance se consideran solo en el t\'ermino de colisiones $C_\alpha$ asumiendo \'unicamente colisiones binarias.
 
   Ahora de la mec\'anica est\'istica es posible obtener los momentos de una distribuci\'on, nos interesa el primer y segundo momento\cite{helander2005} de la distribuci\'on definidos como 
 
   \begin{equation}
-    n_\alpha\left<g_k\right> \equiv \int d^3 g_k f
+    n_\alpha\left<g_k\right> \equiv \int d^3 g_k f_\alpha
   \end{equation}
 
-  Donde $g_k$ est\'a dado por $\text{const} \cdot m_\alpha\textbf{v}^k$. De ah\'i obtenemos las siguentes expresiones 
+  Donde $g_k$ est\'a dado por $\text{const} \cdot m_\alpha\textbf{v}^k$, con $\textbf{v}^k = \textbf{v}\otimes\textbf{v}\otimes\dots\otimes\textbf{v}$. De ah\'i obtenemos las siguentes expresiones 
 
   \begin{eqnarray}
     n_\alpha &=& \int d^3v f_\alpha \label{eq:dens}\\
@@ -26,7 +26,7 @@ Los gases ionizados pueden ser espec\'ificados por una funci\'on de distribuci\'
     \textbf{Q}_\alpha &\equiv& \frac{m_\alpha n_\alpha \left<v^2\textbf{v}\right>}{2}\label{eq:heat}
   \end{eqnarray}
 
-El momento cero en la Ec. \eqref{eq:dens} es la densidad de part\'iculas de una especie en el plasma, i.e., el n\'umero de part\'iculas de una especie por unidad de volumen. El primer momento Ec.\eqref{eq:vel} es la velocidad promedio de las part\'iculas de una especie en el plasma. La Ec.\eqref{eq:heat} es el flujo de energ\'ia. 
+El momento cero en la Ec. \eqref{eq:dens} es la densidad de part\'iculas de una especie en el plasma, i.e., el n\'umero de part\'iculas de una especie por unidad de volumen. El primer momento Ec.\eqref{eq:vel} es la velocidad promedio de las part\'iculas de una especie en el plasma. La Ec.\eqref{eq:heat} es el flujo de energ\'ia y se obtiene de la traza del segundo momento. 
 
   Ahora definimos el flujo de part\'iculas en el plasma como 
   
@@ -46,13 +46,13 @@ El momento cero en la Ec. \eqref{eq:dens} es la densidad de part\'iculas de una 
 Para el momento cero, usando \eqref{eq:moments} con $g_k = g_0 = 1$
 		
 	  \begin{eqnarray*}
-      \int d^3v\frac{\partial f_\alpha}{\partial t} + \int \textbf{v}\cdot \nabla f_\alpha d^3v + \int d^3v \textbf{a}_{l,\alpha} \cdot\nabla_v f_\alpha = \int d^3v C_\alpha
+      \int d^3v\partial_t f_\alpha + \int \textbf{v}\cdot \nabla f_\alpha d^3v + \int d^3v \textbf{a}_{l,\alpha} \cdot\nabla_v f_\alpha = \int d^3v C_\alpha
 		\end{eqnarray*}
 		
 		Tomando t\'ermino a t\'ermino la ecuaci\'on anterior, el primer t\'ermino 
 		
 		\begin{eqnarray*}
-				\int d^3v \frac{\partial f_\alpha}{\partial t} = \frac{\partial}{\partial t}\int d^3v f_\alpha =  \frac{\partial n_\alpha}{\partial t}
+				\int d^3v \partial_t f_\alpha = \partial_t\left(\int d^3v f_\alpha\right) =  \partial_t n_\alpha
 		\end{eqnarray*}
 		
 		Para el segundo t\'ermino primero, considerando que $\nabla\cdot\textbf{v} = 0$
@@ -68,7 +68,7 @@ Para el momento cero, usando \eqref{eq:moments} con $g_k = g_0 = 1$
       \int d^3v \nabla\cdot(\textbf{v}f_\alpha) = \nabla\cdot \int d^3v \textbf{v}f_\alpha = \nabla\cdot(n_\alpha \textbf{u}_\alpha) = \nabla\cdot\pmb{\Gamma}_\alpha 
     \end{eqnarray*}
 		
-    Luego, para el tercer t\'ermino, como $\textbf{E}$ y $\textbf{B}$ no son dependientes de $\textbf{v}$, y como se demostr\'o considerando $\nabla_\textbf{v}\textbf{a}_{l,\alpha} = 0$
+    Luego, para el tercer t\'ermino, como $\textbf{E}$ y $\textbf{B}$ no son dependientes de $\textbf{v}$, y como se demostr\'o considerando $\nabla_\textbf{v}\cdot\textbf{a}_{l,\alpha} = 0$
 
     \begin{equation*}
       \textbf{a}_{l, \alpha}\cdot \nabla_\textbf{v} f_\alpha = \nabla_\textbf{v}(\textbf{a}_{l,\alpha}f_\alpha)
@@ -149,14 +149,14 @@ En este caso la energ\'ia del sistema la definimos como $W \equiv m_\alpha \left
 El segundo termino se puede escribir como 
 
 \begin{eqnarray}
-  \int d^3v \frac{1}{2}m_\alpha v^2\textbf{v}\cdot\nabla f_\alpha = \frac{1}{2}m_\alpha\nabla\cdot\int d^3v v^2\textbf{v}f_\alpha \nonumber \\
+  \int d^3v \frac{1}{2}m_\alpha v^2\textbf{v}\cdot\nabla f_\alpha = \frac{1}{2}m_\alpha\nabla\cdot\left(\int d^3v v^2\textbf{v}f_\alpha\right) \nonumber \\
   = \nabla\cdot \left(\frac{1}{2}m_\alpha\left<v^2\textbf{v}\right>\right) = \nabla\cdot\textbf{Q}
 \end{eqnarray}
 
 El tercer t\'ermino es tal que 
 
 \begin{eqnarray}
-  \int d^3v \frac{1}{2}m_\alpha v^2\textbf{a}_{l,\alpha}\cdot \nabla_\textbf{v}f_\alpha&=& \frac{1}{2}m_\alpha \left(\int d^3v \nabla_\textbf{v}\cdot(v^2f_\alpha\textbf{a}_{l,\alpha}) - \int d^3v f_\alpha \nabla(v^2) \cdot \textbf{a}_{l,\alpha}\right)\nonumber\\
+  \int d^3v \frac{1}{2}m_\alpha v^2\textbf{a}_{l,\alpha}\cdot \nabla_\textbf{v}f_\alpha&=& \frac{1}{2}m_\alpha \left(\int d^3v \nabla_\textbf{v}\cdot(v^2f_\alpha\textbf{a}_{l,\alpha}) - \int d^3v f_\alpha (\nabla v^2) \cdot \textbf{a}_{l,\alpha}\right)\nonumber\\
   &=& \frac{1}{2}m_\alpha\left(\cancel{\oint_{\partial V}v^2f_\alpha \textbf{a}_{l,\alpha}d\textbf{S}_v} - 2\int d^3v f_\alpha \textbf{a}_{l,\alpha}\cdot\textbf{v}\right) \nonumber\\
   &=& -m_\alpha\frac{Z_\alpha e}{m_\alpha}\left(\int d^3v f_\alpha \textbf{E}\cdot\textbf{v} + \int d^3v f_\alpha \cancel{(\textbf{v}\times\textbf{B})}\cdot\textbf{v}\right)\nonumber\\
   &=& -Z_\alpha e\textbf{E}\cdot\int d^3v f_\alpha \textbf{v} = -Z_\alpha en_\alpha\textbf{E}\cdot\textbf{u}_\alpha 

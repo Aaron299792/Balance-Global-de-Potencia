@@ -1,10 +1,10 @@
 \section{Colisiones en el Plasma: Secciones eficaces y frecuencias de colisi\'on. Introducci\'on cualitativa desde una perpectiva en 1D}
 
-  En est\'a secci\'on introduciremos de modo cualitativo los distintos conceptos fundamentales en el \'ambito de colisiones, si bien est\'as en algunos casos no son las expresiones generales usadas para casos m\'as amplios y modelos m\'as complejos, introduce de manera simple los conceptos bases en los que se fundamentan los modelos cin\'eticos. 
+  En est\'a secci\'on introduciremos de modo cualitativo los distintos conceptos fundamentales en el \'ambito de colisiones, si bien est\'as, en algunos casos, no son las expresiones generales usadas para casos m\'as amplios y modelos m\'as complejos, introducen de manera simple los conceptos bases en los que se fundamentan los modelos cin\'eticos. 
 
-  Las colisiones m\'as simples que pueden presentarse en un plasma son aquellas entre electrones con \'atomos neutros, estas pueden ser el\'asticas, lo que significa que ambas especies mantienen su identidad y en modelos simples los electrones simplemente rebotan de los neutros, se asume que el cambio de momento de los \'ultimos es negligible. Luego est\'an las colisiones inel\'asticas, en este caso se dan procesos de ionizaci\'on, radiaci\'on, recombinaci\'on. Entre especies con carga neta en el plasma tambi\'en se pueden encontrar las llamadas colisiones de Coulomb, que como su nombre lo indica se dan por interacciones de Coulomb entre las part\'iculas del plasma. 
+  Las colisiones m\'as simples que pueden presentarse en un plasma son aquellas entre electrones con \'atomos neutros, estas pueden ser el\'asticas, lo que significa que ambas especies mantienen su identidad y en modelos simples los electrones simplemente rebotan de los neutros, se asume que el cambio de momento de los \'ultimos es negligible. Luego est\'an las colisiones inel\'asticas, en este caso se dan procesos de ionizaci\'on, radiaci\'on y/o recombinaci\'on. Entre especies con carga neta en el plasma tambi\'en se pueden encontrar las llamadas colisiones de Coulomb, que como su nombre lo indica, se dan por interacciones de Coulomb entre las part\'iculas del plasma. 
 
-  A groso modo, estos eventos mencionados pueden estudiarse desde la estad\'istica usando el concepto de probabilidad y secciones eficaces. Por ejemplo, para una colisi\'on el\'astica o inel\'astica se puede definir la secci\'on eficaz $\sigma$ que es el \'area transversal, si modelamos las part\'iculas como esferas, que tendr\'ia la part\'icula si al colisionar un electr\'on con el neutro, este se reflejara en un \'angulo de $90^\circ$ o si el \'atomo se ionizara con todos los electrones que lo colisionan.
+  A groso modo, estos eventos mencionados pueden estudiarse desde la estad\'istica usando el concepto de probabilidad y secciones eficaces. Por ejemplo, para una colisi\'on el\'astica o inel\'astica, se puede definir la secci\'on eficaz $\sigma$ que es el \'area transversal que, si modelamos las part\'iculas como esferas r\'igidas, tendr\'ia la part\'icula si al colisionar un electr\'on con el neutro este se reflejara en un \'angulo de $90^\circ$ o si el \'atomo se ionizara con todos los electrones que lo colisionan.
 
     Sea $n_0$ la densidad de neutros que hay en un plasma, se define el camino libre medio $\lambda_{mfp}$ como el recorrido promedio que tendr\'a el electr\'on antes de tener una probabilidad de colisionar con otro neutro \cite{goldston1995}. 
 
@@ -49,14 +49,14 @@
  		\caption{Flujo de electrones $\Gamma$ incidente sobre una loza de grosor $dx$ que contiene una densidad de neutros $n_0$.}
  	\end{figure}
 
-    Hacia la loza hay un flujo de electrones perpendicular al \'area transversal de la loza, este flujo incidente los llamaremos $\Gamma(x)$, ya que consideramos los neutro como esferas r\'igidas de secci\'on efectiva, si un electr\'on colisiona con un neutro habr\'a ionizaci\'on por lo qque el flujo de electrones no es el mismo que sale, el flujo de electrones que no colisiona con los neutros est\'a dado por $\Gamma + d\Gamma = \Gamma(1 - n_0\sigma dx)$ De esto se obtiene que, el cambio de $\Gamma$ con la distancia $x$ est\'a dada por 
+    Hacia la loza hay un flujo de electrones perpendicular al \'area transversal de la loza, este flujo incidente los llamaremos $\Gamma(x)$. Ya que consideramos los neutro como esferas r\'igidas de secci\'on efectiva, si un electr\'on colisiona con un neutro habr\'a ionizaci\'on por lo que el flujo de electrones no es el mismo que sale, el flujo de electrones que no colisiona con los neutros est\'a dado por $\Gamma + d\Gamma = \Gamma(1 - n_0\sigma dx)$. De esto se obtiene que, el cambio de $\Gamma$ con la distancia $x$ est\'a dada por 
 
     \begin{eqnarray}
       \frac{d\Gamma}{dx} &=& -n_0\sigma \nonumber\\
       \implies \Gamma(x) &=& \Gamma_0\exp{(-n_0\sigma x)} \nonumber
     \end{eqnarray}
   
-    N\'otese que $n_0\sigma$ tiene unidades de $m^{-1}$, se define $\lambda_{mfp} = (n_0\sigma)^{-1}$ como el camino libre, trayecto recorrido a partir del cual existe una probabilidad razonable de colision con un neutro \cite{goldston1995}. Para los casos de inter\'es existe un $\lambda_{mfp}$ cuantitativamente distinto al de este caso, pero la definici\'on cualitativa es la misma.
+    N\'otese que $n_0\sigma$ tiene unidades de $m^{-1}$, se define $\lambda_{mfp} = (n_0\sigma)^{-1}$ como el camino libre, trayecto recorrido a partir del cual existe una probabilidad razonable de colisi\'on con un neutro \cite{goldston1995}. Para los casos de inter\'es existe un $\lambda_{mfp}$ cuantitativamente distinto al de este caso, pero la definici\'on cualitativa es la misma.
 
   Para electrones con velocidad $v$ el tiempo medio entre colisiones es
 
@@ -70,7 +70,7 @@
     \nu = \left<\tau^{-1}\right> = n_0\left<\sigma v\right> = \frac{n_0}{n_e}\int d^3 f_e(v)\sigma(v)v
   \end{equation}
 
-  Para cada tipo colisi\'on se puede asignar una frecuencia de colisi\'on de la cual se puede obtener la tasa en la que cada evento da paso a perdida o adici\'on de part\'iculas de una u otra especie en el plasma, al multiplicar estas frecuencias por la densidad de las part\'iculas se obtiene un t\'ermino $N_{evento}$ que es la tasa de emisi\'on o fuente, este es el n\'umero de eventos (colisiones que provocan ionizaci\'on, radiaci\'on, colisiones de Coulomb, recombianciones, etc) que se dan por segundo en un determinado volumen \cite{lechte2002}.
+  Para cada tipo colisi\'on se puede asignar una frecuencia de colisi\'on de la cual se puede obtener la tasa en la que cada evento da paso a perdida o adici\'on de part\'iculas de una u otra especie en el plasma. Al multiplicar estas frecuencias por la densidad de las part\'iculas se obtiene un t\'ermino $N_{evento}$ que es la tasa de emisi\'on o fuente, este es el n\'umero de eventos (colisiones que provocan ionizaci\'on, radiaci\'on, colisiones de Coulomb, recombianciones, etc) que se dan por segundo en un determinado volumen \cite{lechte2002}.
 
   \begin{equation}\label{eq:events}
     N_{evento}(T_\alpha) = n_\alpha n_\beta\left<\sigma v\right>_{evento}(T_\alpha) 
