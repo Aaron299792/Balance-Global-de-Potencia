@@ -141,16 +141,16 @@ Aqu\'i es importante notar que $(\textbf{x}, \textbf{v})$ son puntos en un espac
 
 \begin{eqnarray}
   \int d^3v \frac{1}{2}m_\alpha v^2\partial_t f_\alpha &=& \partial_t \left(\frac{1}{2}m_\alpha \int d^3 f_\alpha v^2 \right) \nonumber\\
-  &=& \partial_t\left(\frac{1}{2}m_\alpha \left<v^2\right>\right) = \partial_t W
+  &=& \partial_t\left(\frac{1}{2}m_\alpha \left<v^2\right>\right) = \partial_t W_\alpha
   \end{eqnarray}
 
-En este caso la energ\'ia del sistema la definimos como $W \equiv m_\alpha \left<v^2\right>/2$.
+En este caso la energ\'ia del sistema la definimos como $W_\alpha \equiv m_\alpha \left<v^2\right>/2$.
 
 El segundo termino se puede escribir como 
 
 \begin{eqnarray}
   \int d^3v \frac{1}{2}m_\alpha v^2\textbf{v}\cdot\nabla f_\alpha = \frac{1}{2}m_\alpha\nabla\cdot\left(\int d^3v v^2\textbf{v}f_\alpha\right) \nonumber \\
-  = \nabla\cdot \left(\frac{1}{2}m_\alpha\left<v^2\textbf{v}\right>\right) = \nabla\cdot\textbf{Q}
+  = \nabla\cdot \left(\frac{1}{2}m_\alpha\left<v^2\textbf{v}\right>\right) = \nabla\cdot\textbf{Q}_\alpha
 \end{eqnarray}
 
 El tercer t\'ermino es tal que 
@@ -165,7 +165,7 @@ El tercer t\'ermino es tal que
 Finalmente obtenemos al juntar todo lo anterior que 
 
 \begin{equation}\label{eq:energy}
-  \partial_t W + \nabla\cdot\textbf{Q} = Z_\alpha en_\alpha\textbf{E}\cdot\textbf{u}_\alpha + \int d^3v\frac{mv^2}{2}C_\alpha
+  \partial_t W_\alpha + \nabla\cdot\textbf{Q}_\alpha = Z_\alpha en_\alpha\textbf{E}\cdot\textbf{u}_\alpha + \int d^3v\frac{mv^2}{2}C_\alpha
 \end{equation}
 
 Esta es la llamada ecuaci\'on de energ\'ia.
@@ -186,10 +186,10 @@ En el lado izquierda de la Ec.\eqref{eq:energy} el primer t\'ermino corresponde 
     \item $\mathcal{Q}_\alpha$ : raz\'on de la energ\'ia t\'ermica transferida por colisiones con otras especies. 
   \end{itemize}
 
-  El t\'ermino $W$ en la Ec. \eqref{eq:energy} se pude escribir de otra forma tomando$\textbf{v} = \textbf{u}_\alpha + \textbf{w}$ tal que $\left<v^2\right> = u^2_\alpha + \left<w^2\right>$ con esto y las definiciones anteriores la  ecuaci\'on de energ\'ia se puede escribir como \cite{helander2005} 
+  El t\'ermino $W$ en la Ec. \eqref{eq:energy} se pude escribir de otra forma tomando $\textbf{v} = \textbf{u}_\alpha + \textbf{w}_\alpha$ tal que $\left<v^2\right> = u^2_\alpha + \left<w_\alpha^2\right>$ con esto y las definiciones anteriores la  ecuaci\'on de energ\'ia se puede escribir como \cite{helander2005} 
 
   \begin{equation}\label{eq:energy2}
-    \frac{\partial}{\partial t}\left(\frac{3n_\alpha T_\alpha}{2} + \frac{m_\alpha n_\alpha u_\alpha^2}{2}\right) + \nabla\cdot\textbf{Q} = Z_\alpha e n_\alpha \textbf{E}\cdot\textbf{u}_\alpha + \int d^3v\frac{mv^2}{2}C_\alpha
+    \frac{\partial}{\partial t}\left(\frac{3n_\alpha T_\alpha}{2} + \frac{m_\alpha n_\alpha u_\alpha^2}{2}\right) + \nabla\cdot\textbf{Q}_\alpha = Z_\alpha e n_\alpha \textbf{E}\cdot\textbf{u}_\alpha + \int d^3v\frac{mv^2}{2}C_\alpha
   \end{equation} 
 
   El segundo t\'ermino en el lado izquierdo de la Ec.\eqref{eq:energy} es entonces, \textbf{la energ\'ia total transferida} por colisiones con otras especies.
@@ -203,15 +203,15 @@ En el lado izquierda de la Ec.\eqref{eq:energy} el primer t\'ermino corresponde 
   B\'asicamente el lado izquierdo de la ecuaci\'on es la potencia debido al calentamiento de Joule o por colisiones con otras part\'iculas. En el caso estacionario la Ec. \eqref{eq:energy} se vuelve
 
   \begin{eqnarray}
-  \nabla\cdot\textbf{Q} = \mathcal{Q}_\alpha + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha \nonumber\\
-    \int_V d^3r \nabla\cdot\textbf{Q} = \mathcal{Q}_\alpha + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha\nonumber\\
-    \oint_{\partial V} \textbf{Q}\cdot d\textbf{S} = \int_V d^3r\left[\mathcal{Q}_\alpha + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha\right] \nonumber
+  \nabla\cdot\textbf{Q}_\alpha = \mathcal{Q}_\alpha + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha \nonumber\\
+    \int_V d^3r \nabla\cdot\textbf{Q}_\alpha = \mathcal{Q}_\alpha + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha\nonumber\\
+    \oint_{\partial V} \textbf{Q}_\alpha\cdot d\textbf{S} = \int_V d^3r\left[\mathcal{Q}_\alpha + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha\right] \nonumber
     \end{eqnarray}
 
-    Finalmente llegamos a la siguiente expresi\'on al definir el flujo radial de energ\'ia $\Gamma_E \equiv \oint_{\partial V} \textbf{Q}\cdot d\textbf{S}$ y $Q \equiv \mathcal{Q}_\alpha + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha$.
+    Finalmente llegamos a la siguiente expresi\'on al definir el flujo radial de energ\'ia $\Gamma_E^\alpha \equiv \oint_{\partial V} \textbf{Q}_\alpha\cdot d\textbf{S}$ y $\mathcal{S}_{Q_\alpha} \equiv \mathcal{Q}_{\alpha} + (Z_\alpha e n_\alpha\textbf{E} + \textbf{R}_\alpha)\cdot\textbf{u}_\alpha$. Este t\'ermino representa b\'asicamente la disipaci\'on de energ\'ia por unidad de tiempo en el plasma debido a la interacci\'on con campos y especies diferentes a $\alpha$.
 
     \begin{equation}
-      \Gamma_E = \int_Vd^3r Q \approx \left<Q\right>V
+      \Gamma_E^\alpha = \int_Vd^3r \mathcal{S}_{Q_\alpha} \approx \left<\mathcal{S}_{Q_\alpha}\right>V
     \end{equation}
 
    Trabajaremos con estas definiciones m\'as adelante.
