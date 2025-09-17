@@ -1,46 +1,48 @@
-\subsection{Densidad $n = n(T_e)$ en un plasma cuasi-neutral}
+\subsection{Densidad $n = n(r)$ en un plasma cuasi-neutral}
 
-  En este caso mantendremos \'unicamente tres supuestos:
+  En este caso mantendremos \'unicamente los supuestos:
 
   \begin{itemize}
     \item Cuasi-neutralidad: $n = n_e \approx n_i$.
-    \item Temperatura en los bordes: $T_e(a) = \alpha T_e$ con $\alpha \in [0,1]$.
     \item Temperatura i\'onica baja: $T_i \ll T_e$.
+    \item Geometr\'ia cil\'indrica del plasma.
+    \item Campo magn\'etico uniforme.
+    \item Reg\'imen de transporte clásico.
   \end{itemize}
 
   Igualando las expresiones \eqref{eq:8} y \eqref{eq:9}, usando \eqref{eq:Gamma_n}, dividiendo ambos lados de la ecuaci\'on por V y de las definiciones de los $N_p$ obtenemos:
 
   \begin{eqnarray*}
-  \frac{A}{V}(n\chi\nabla T_e + \frac{3}{2}\alpha D T_e \nabla n) = \\
-  -\frac{P_{rf}}{V} + (E_{ion}\left<\sigma v\right>_{ion} + E_{rad}^0\left<\sigma v\right>_{rad}^0)n_0 n + \\ \left(E_{ion_2}\left<\sigma v\right>_{ion_2} + \frac{3}{2}T_e\left<\sigma v\right>_{rec} + E_{rad}^i\left<\sigma v\right>_{rad}^i + \frac{Q_{ei}}{n^2}\right)n^2
+  \frac{A}{V}\left(n(r)\chi_\perp(r)\partial_r T(r) + \frac{3}{2}D_\perp(r) T(r) \partial_r n(r)\right) = \\
+  -\frac{P_{rf}}{V} + (E_{ion}\left<\sigma v\right>_{ion} + E_{rad}^0\left<\sigma v\right>_{rad}^0)n_0 n(r) + \\ \left(E_{ion_2}\left<\sigma v\right>_{ion_2} + \frac{3}{2}T\left<\sigma v\right>_{rec} + E_{rad}^i\left<\sigma v\right>_{rad}^i + \frac{Q_{ei}}{n(r)^2}\right)n(r)^2
 \end{eqnarray*}
 
 Ahora trabajamos un poco m\'as con la interacci\'on de Coulomb que hasta ahora no se hab\'ia considerado. Usando las expresiones de $Q_{ei}$ y de $\tau^{ei}$ se puede definir las constante $\varpi \equiv \left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{4\sqrt{2\pi m_e}}{m_i}$ y se puede reescribir $Q_{ei}$ tal que primero escribimos $1 / \tau^{ei}$ usando la Ec. \eqref{eq:tau}
 
   \begin{equation*}
-    \frac{1}{\tau^{ie}} = \left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{8\sqrt{2\pi m_e}n}{3 m_i}\frac{\ln{\Lambda}}{T_e^{3/2}}
+    \frac{1}{\tau^{ie}} = \left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{8\sqrt{2\pi m_e}n}{3 m_i}\frac{\ln{\Lambda}}{T^{3/2}}
   \end{equation*} 
 
   Insertamos esto en la expresi\'on de $Q_{ei}$ Ec.\eqref{eq:Qei} tal que 
 
   \begin{eqnarray}
-    Q_{ei} &=& \frac{3}{2}n(T_e - T_i) \left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{8\sqrt{2\pi m_e}n}{3 m_i}\frac{\ln{\Lambda}}{T_e^{3/2}} \nonumber \\
-           &=& \frac{3}{2}nT_e\left(1 - \cancel{\frac{T_i}{T_e}}\right) \left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{8\sqrt{2\pi m_e}n}{3 m_i}\frac{\ln{\Lambda}}{T_e^{3/2}} \nonumber \\
-           &=& \left[\left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{4\sqrt{2\pi m_e}}{m_i}\right]\frac{n^2\ln{\Lambda}}{T_e^{1/2}} \nonumber \\
-           &=& \varpi\frac{n^2\ln{\Lambda}}{T_e^{1/2}}
+    Q_{ei} &=& \frac{3}{2}n(T(r) - T_i) \left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{8\sqrt{2\pi m_e}n}{3 m_i}\frac{\ln{\Lambda}}{T(r)^{3/2}} \nonumber \\
+           &=& \frac{3}{2}nT(r)\left(1 - \cancel{\frac{T_i}{T(r)}}\right) \left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{8\sqrt{2\pi m_e}n(r)}{3 m_i}\frac{\ln{\Lambda}}{T(r)^{3/2}} \nonumber \\
+           &=& \left[\left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{4\sqrt{2\pi m_e}}{m_i}\right]\frac{n(r)^2\ln{\Lambda}}{T(r)^{1/2}} \nonumber \\
+           &=& \varpi\frac{n(r)^2\ln{\Lambda}}{T(r)^{1/2}}
   \end{eqnarray}
 
   Al reemplazar $Q_{ei}$ se obtiene
   \begin{eqnarray*}
-    \frac{3}{2}\frac{\alpha AD T_e}{V}\nabla n - \left(E_{ion_2}\left<\sigma v\right>_{ion_2} + \frac{3}{2}T_e\left<\sigma v\right>_{rec} + E_{rad}^i\left<\sigma v\right>_{rad}^i + \frac{\varpi \ln{\Lambda}}{\sqrt{T_e}}\right)n^2 + \\ \left(\chi\frac{A}{V}\nabla T_e - E_{ion}\left<\sigma v\right>_{ion}n_0 - E_{rad}^0\left<\sigma v\right>_{rad}^0n_0\right)n = - \frac{P_{rf}}{V}
+    \frac{3}{2}\frac{AD_\perp(r) T(r)}{V}\partial_r n(r) - \left(E_{ion_2}\left<\sigma v\right>_{ion_2} + \frac{3}{2}T(r)\left<\sigma v\right>_{rec} + E_{rad}^i\left<\sigma v\right>_{rad}^i + \frac{\varpi \ln{\Lambda}}{\sqrt{T(r)}}\right)n(r)^2 + \\ \left(\chi_\perp(r)\frac{A}{V}\partial_r T(r) - E_{ion}\left<\sigma v\right>_{ion}n_0 - E_{rad}^0\left<\sigma v\right>_{rad}^0n_0\right)n(r) = - \frac{P_{rf}}{V}
   \end{eqnarray*}
 
-  Finalmente podemos dejar $\nabla n$ sin factores y obtemos la expresi\'on final incluyendo todas las dependencias con $T_e$
+  Finalmente podemos dejar $\partial_r n$ sin factores y obtemos la expresi\'on final incluyendo todas las dependencias con $T(r)$
 
   \begin{eqnarray}\label{eq:PDEnT}
-    \nabla n - \frac{2}{3}\frac{V}{\alpha \varUpsilon T_e}\left(E_{ion_2}\left<\sigma v\right>_{ion_2}(T_e) + \frac{3}{2}T_e\left<\sigma v\right>_{rec}(T_e) + E_{rad}^i\left<\sigma v\right>_{rad}^i(T_e) + \frac{\varpi\ln{\Lambda}(T_e)}{\sqrt{T_e}}\right)n^2 + \nonumber\\ \frac{2}{3}\frac{1}{\alpha\varUpsilon T_e}\left[\chi\nabla T_e - n_0V\left(E_{ion}\left<\sigma v\right>_{ion}(T_e) - E_{rad}^0\left<\sigma v\right>_{rad}^0(T_e)\right)\right]n = -\frac{2}{3}\frac{P_{rf}}{\alpha \varUpsilon T_e}
+    \frac{dn(r)}{dr} &-& \frac{2}{3}\frac{V}{\varUpsilon(r) T(r)}\left(E_{ion_2}\left<\sigma v\right>_{ion_2}[T(r)] + \frac{3}{2}T(r)\left<\sigma v\right>_{rec}[T(r)] + E_{rad}^i\left<\sigma v\right>_{rad}^i[T(r)] + \frac{\varpi\ln{\Lambda}[T(r)]}{\sqrt{T(r)}}\right)n(r)^2  \nonumber\\ &+& \frac{2}{3}\frac{1}{\varUpsilon T(r)}\left[\chi_\perp(r)\frac{dT(r)}{dr} - n_0V\left(E_{ion}\left<\sigma v\right>_{ion}[T(r)] - E_{rad}^0\left<\sigma v\right>_{rad}^0[T(r)]\right)\right]n(r) \nonumber\\ &=& -\frac{2}{3}\frac{P_{rf}}{\varUpsilon(r) T(r)}
   \end{eqnarray}
 
-  Recordando que $\varpi$ es una constante, se obtiene una expresi\'on final que depende de cinco par\'ametros los cuales son: $P_{rf}$, $V$, $n_0$, $\alpha\varUpsilon$, y $\chi$. 
+  Recordando que $\varpi$ es una constante, se obtiene una expresi\'on final que depende de tres par\'ametros los cuales son: $P_{rf}$, $V$, $n_0$. 
 
-  N\'otese que la ecuaci\'on \eqref{eq:PDEnT} es una ecuaci\'on diferencial parcial no lineal, lo que hace que sea un problema con una complejidad bastante alta. A partirde aqu\'i trataremos de plantear un 'fit an\'alitico' para la densidad usando una red Neuronal F\'isica (PINN). 
+  N\'otese que la ecuaci\'on \eqref{eq:PDEnT} es una ecuaci\'on diferencial ordinaria no lineal, lo que hace que sea un problema con una complejidad bastante alta. A partirde aqu\'i trataremos de plantear un 'fit an\'alitico' para la densidad usando una red Neuronal F\'isica (PINN). 
