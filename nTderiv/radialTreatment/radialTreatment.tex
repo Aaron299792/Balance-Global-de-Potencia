@@ -1,30 +1,34 @@
-\subsection{Modelo 1D de la descripción del Plasma}
+\subsection{Modelo 1D de la descripci\'on del Plasma: Condiciones de Frontera}
 
-Partiendo de la Ecs. \eqref{eq:supavg}, \eqref{eq:partflux} y \eqref{eq:energyflux} para el flujo radial de part\'iculas, suponiendo que el plasma está ionizado débilmente y que además el transporte de partículas es dominado bajo el régimen colisional; es decir, la termodifusividad de las partículas $D_T\nabla T$ es tal que $|D\nabla n| \gg |D_T\nabla T|$ se tiene que
-
-\begin{eqnarray}
-  \Gamma_n &=& -A\left<\textbf{D}\cdot\nabla n\right>_{\partial V} \\
-           &=& \oint \textbf{D}\cdot\nabla n\cdot d\textbf{S}\\
-           &=& \oint [D_\perp(r)\partial_r n(r)]\hat{r}\cdot\hat{r}dS(\phi,z) \\
-           &=& -AD_\perp(r)\partial_r n(r) 
-\end{eqnarray}
-
-
-En cuanto el flujo de energía, también consideraremos únicamente el un transporte colisional para mantener la válidez del modelo. Para el primer término del flujo radial de energía se tiene que 
+Partiendo de la Ecs. \eqref{eq:supavg}, \eqref{eq:partflux} y \eqref{eq:energyflux} para el flujo radial de part\'iculas, suponiendo que el plasma est\'a ionizado d\'ebilmente y que, adem\'as el transporte de part\'iculas es dominado bajo el r\'egimen colisional; es decir, la termodifusividad de las part\'iculas $D_T\nabla T$ es tal que $|D\nabla n| \gg |D_T\nabla T|$ se tiene que
 
 \begin{eqnarray}
-  -A\left<\pmb{\chi}\cdot\nabla T\right>_{\partial V} &=& - \oint_{\partial V} (\pmb{\chi}\cdot\nabla T)\cdot d\textbf{S} \\
-           &=& -\oint_{\partial V} (\chi_\perp(r) \partial_r T(r))\hat{r}\cdot\hat{r}dS(\phi,z)\\
-           &=& -[\chi_\perp(r)\partial_rT(r)]\int dS(\phi,z)\\
-           &=& -A\chi_\perp(r)\partial_rT(r)
+  \Gamma_n(R) &=& -A(R)\left<\textbf{D}\cdot\nabla n\right>_{\partial V} \\
+           &=& \oint\limits_{\partial V} \textbf{D}\cdot\nabla n\cdot d\textbf{S}\\
+           &=& \oint\limits_{\partial V} [D_\perp(r)\partial_r n(r)\hat{r}]\cdot\hat{r}dS(\phi,z) \\
+           &=& -[A(r)D_\perp(r)\partial_r n(r)]_{r=R}\\
+           &=& -A(R)D_\perp(R)[\partial_r n(r)]_{r=R}
 \end{eqnarray}
 
-El segundo término de Ec. \eqref{eq:energyflux} se puede simplificar como
+En este caso, pese a que presuponemos que el flujo a trav\'es de la superficie es totalmente radial, cuando integramos no podemos obtener una dependencia con el radio de forma directa, m\'as bien, obtenemos est\'as cantidades evaluadas en la superficie cuya \'area es $A(R)$, y debemos evaluar en el radio $R$ de esa superficie. Por lo que, la cantidad per se no nos da una funci\'on del radio directamente, solo el flujo que sale por una superficie espec\'ifica. 
+
+En cuanto el flujo de energ\'ia, tambi\'en consideraremos \'unicamente el un transporte colisional para mantener la v\'alidez del modelo. Para el primer t\'ermino del flujo radial de energ\'ia se tiene que 
 
 \begin{eqnarray}
-  \frac{3}{2}A\left<T\pmb{\Gamma}\right>_{\partial V} &=& \frac{3}{2}\oint T(r)\pmb{\Gamma}\cdot d\textbf{S} \\
-                                                      &=& \frac{3}{2}T(r)\oint \pmb{\Gamma}\cdot d\textbf{S}\\
-                                                      &=& \frac{3}{2}T(r)\Gamma_n
+  -A\left<\pmb{\chi}\cdot\nabla T\right>_{\partial V} &=& - \oint\limits_{\partial V} (\pmb{\chi}\cdot\nabla T)\cdot d\textbf{S} \\
+                                                      &=& -\oint\limits_{\partial V} [(\chi_\perp(r) \partial_r T(r))\hat{r}]\cdot\hat{r}dS(\phi,z)\\
+                                                      &=& -[\chi_\perp(r)\partial_rT(r)]_{r=R}\int dS(\phi,z)\\
+                                                      &=& -A(R)\chi_\perp(R)[\partial_rT(r)]_{r=R}
 \end{eqnarray}
 
-Estas suposiciones son válidas en el caso donde las variaciones poloidales y axiales de $T$ y $n$ son despreciables respecto a las dimensiones de el cambio radial, i.e., para una cantidad física macroscópica $\Delta(r,\phi, z) \approx \Delta(r)$ se tiene que, $|\partial_r \Delta| \gg |\partial_z\Delta|$, $|r^{-1}\partial_\phi\Delta|$.
+El segundo t\'ermino de Ec. \eqref{eq:energyflux} se puede simplificar como
+
+\begin{eqnarray}
+  \frac{3}{2}A(R)\left<T\pmb{\Gamma}\right>_{\partial V} &=& \frac{3}{2}\oint\limits_{\partial V} T(r)\pmb{\Gamma}\cdot d\textbf{S} \\
+                                                         &=& \frac{3}{2}T(R)\oint\limits_{\partial V} \pmb{\Gamma}\cdot d\textbf{S}\\
+                                                      &=& \frac{3}{2}T(R)\Gamma_n(R)
+\end{eqnarray}
+
+Estas suposiciones son v\'alidas en el caso donde las variaciones poloidales y axiales de $T$ y $n$ son despreciables respecto a las dimensiones de el cambio radial, i.e., para una cantidad f\'isica macrosc\'opica $\Delta(r,\phi, z) \approx \Delta(r)$ se tiene que, $|\partial_r \Delta| \gg |\partial_z\Delta|$, $|r^{-1}\partial_\phi\Delta|$.
+
+Fundamentalmente hemos obtenido flujos de energ\'ia a trav\'es de una superficie espec\'ifica; la superficie exterior del plasma. Podemos usar est\'as expresiones para delimitar nuestras condiciones de frontera en el borde, pero no para determinar una dependencia radial en el volumen del plasma. 
