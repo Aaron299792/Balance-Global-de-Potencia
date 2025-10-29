@@ -86,7 +86,7 @@ Donde $P_{ext,T}$ es la potencial externa total que calienta al plasma, $N$ es u
 Además los procesos internos de calentamiento se pueden modelar como $\mathcal{Q}_{int} = E_{evento}N_{evento}$, además de la contribuci\'on por las colisiones de Coulomb $Q_{ie}$, as\'i obtenemos
 
 \begin{eqnarray}
-  \nabla\cdot\textbf{q} &+& \frac{3}{2}\nabla\cdot(T\pmb{\Gamma}) = \frac{P_{ext,T}}{N}f(r) -  [E_{ion_2}\langle\sigma v\rangle_{ion_2}(T) + E_{rec}\langle \sigma v\rangle_{rec}(T) - E_{rad}^0\langle\sigma v\rangle_{rad}^i(T)]n(r)^2 \nonumber \\ &+& [E_{ion}\langle\sigma v\rangle_{ion}(T)+ E_{rad}^i\langle\sigma v\rangle_{rad}^0(T)]n_0n(r) - Q_{ei}(r)
+  \nabla\cdot\textbf{q} &+& \frac{3}{2}\nabla\cdot(T\pmb{\Gamma}) = \frac{P_{ext,T}}{N}f(r) -  [E_{ion_2}\langle\sigma v\rangle_{ion_2}(T) + E_{rec}\langle \sigma v\rangle_{rec}(T) - E_{rad}^i\langle\sigma v\rangle_{rad}^i(T)]n(r)^2 \nonumber \\ &-& [E_{ion}\langle\sigma v\rangle_{ion}(T)+ E_{rad}^0\langle\sigma v\rangle_{rad}^0(T)]n_0n(r) - Q_{ei}(r)
 \end{eqnarray}
 
 Extendiendo la expresi\'on que ya habiamos trabajado \eqref{eq:Qie2}
@@ -129,7 +129,7 @@ Finalmente la expresi\'on final de la ecuaci\'on para el flujo de energ\'ia es
 
 \begin{eqnarray}
  -\frac{4.66}{\gamma m\omega^2}\frac{1}{r}\partial_r\left\{r \frac{n^2(r)}{T^{1/2}(r)}\ln\left[\alpha \frac{T^{3/2}(r)}{n^{1/2}(r)}\right] \partial_r T(r)\right\} - \frac{3}{4\gamma m\omega^2}\frac{\ln\left[\alpha n^{-1/2}(r)T^{3/2}(r)\right]}{T^{1/2}(r)}\partial_r n^2(r)\partial_r T(r) \nonumber + \nonumber\\
- \frac{3}{2}T(r)\nabla\cdot\Gamma =  \frac{P_{ext,T}}{N}f(r) -  [E_{ion_2}\langle\sigma v\rangle_{ion_2}(T) + \frac{3}{2}T(r)\langle\sigma v\rangle_{rec}(T) + E_{rad}^0\langle\sigma v\rangle_{rad}^i(T)]n(r)^2 \nonumber \\ - [E_ion\langle\sigma v\rangle_{ion}(T)+ E_{rad}^i\langle\sigma v\rangle_{rad}^0(T)]n_0n(r) - \varpi\frac{n^2(r)}{T^{1/2}(r)}\ln\left[\alpha \frac{T^{3/2}(r)}{n^{1/2}(r)}\right]\label{eq:EnergyEq}
+ \frac{3}{2}T(r)\nabla\cdot\Gamma =  \frac{P_{ext,T}}{N}f(r) -  [E_{ion_2}\langle\sigma v\rangle_{ion_2}(T) + \frac{3}{2}T(r)\langle\sigma v\rangle_{rec}(T) + E_{rad}^i\langle\sigma v\rangle_{rad}^i(T)]n(r)^2 \nonumber \\ - [E_ion\langle\sigma v\rangle_{ion}(T)+ E_{rad}^0\langle\sigma v\rangle_{rad}^0(T)]n_0n(r) - \varpi\frac{n^2(r)}{T^{1/2}(r)}\ln\left[\alpha \frac{T^{3/2}(r)}{n^{1/2}(r)}\right]\label{eq:EnergyEq}
 \end{eqnarray}
 
 De momento tenemos planteadas las ecuaciones necesarias para encontrar la Temperaturay densidad en t\'erminos una de la otra, es posible que falten ecuaciones para cerrar el sistema, pero de momento las Ecs. \eqref{eq:particleEq} y \eqref{eq:EnergyEq} parecen bastar para encontrar la densidad $n$ en funci\'on de la temperatura. Ahora es crucial modelar las razones de eventos en el plasma y las condiciones de frontera. En el siguiente apartado nos encargaremos de modelar las razones para completar las ecuaciones en t\'erminos de la temperatura, densidad y radio \'unicamente.
