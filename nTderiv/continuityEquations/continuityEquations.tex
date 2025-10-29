@@ -27,13 +27,13 @@ Aqu\'i asumiremos que la densidad de neutros es un par\'ametro del problema y no
 Para un plasma puro con difusi\'on ambipolar \cite{helander2005} se tiene que 
 
 \begin{equation*}
-  D_\perp = \frac{T}{m\omega^2 \tau}
+  D_\perp = \frac{T}{m\omega^2 \tau_{ei}}
 \end{equation*}
 
-con $\omega$ la frecuencia ciclotr\'onica del electr\'on. Donde $\tau$ est\'a dado por \cite{hazeltine2018} 
+con $\omega$ la frecuencia ciclotr\'onica del electr\'on. Donde $\tau_{ei}$ est\'a dado por \cite{hazeltine2018} 
 
 \begin{equation*}
-  \tau = \frac{3}{4}\sqrt{\frac{m}{2\pi}}\frac{T^{3/2}}{\ln\Lambda Z^2e^4 n} = \gamma\frac{T^{3/2}}{\ln\Lambda n}
+  \tau_{ei} = \frac{3}{4}\sqrt{\frac{m}{2\pi}}\frac{T^{3/2}}{\ln\Lambda Z^2e^4 n} = \gamma\frac{T^{3/2}}{\ln\Lambda n}
 \end{equation*}
 
 De all\'i se obtiene que $D_\perp$ es de la forma
@@ -55,7 +55,7 @@ Reacomodando las expresiones obtenemos
   \frac{1}{2\gamma m\omega^2 r}\partial_r\left\{r\frac{\ln{\Lambda(n,T)}}{T^{1/2}(r)}\partial_r n^2(r)\right\} &+& [\langle\sigma v\rangle_{ion_2}(T) + \langle\sigma v\rangle_{rec}(T) + \langle\sigma v\rangle_{rad}^i(T)]n(r)^2 \nonumber \\ &+& [\langle\sigma v\rangle_{ion}(T)+ \langle\sigma v\rangle_{rad}^0(T)]n_0n(r) = 0
 \end{eqnarray}
 
-Ahora, de forma expl\'icita el logaritmo de Coulomb \cite{hazeltine2018} es
+Ahora, de forma expl\'icita $\Lambda \equiv \lambda_D/b_{min}$ donde $\lambda_D = \sqrt{\epsilon_0 T / n e^2 }$ es la distancia de Debye y $b_{min} = 2\pi \epsilon_0 m_e v_{T_e}^2/e^2$ el par\'ametro de impacto m\'inimo para una colisi\'on de Coulomb y $v_{T_e} = \sqrt{2 T_e / m_e}$ la velocidad t\'ermica \cite{helander2005} de all\'i se pude obtener que 
 
 \begin{equation*}
   \ln{\Lambda} = \ln\left(\frac{4\pi\epsilon_0^{3/2}}{e^3}\frac{T(r)^{3/2}}{\sqrt{n(r)}}\right)
@@ -86,7 +86,7 @@ Donde $P_{ext,T}$ es la potencial externa total que calienta al plasma, $N$ es u
 Además los procesos internos de calentamiento se pueden modelar como $\mathcal{Q}_{int} = E_{evento}N_{evento}$, además de la contribuci\'on por las colisiones de Coulomb $Q_{ie}$, as\'i obtenemos
 
 \begin{eqnarray}
-  \nabla\cdot\textbf{q} &+& \frac{3}{2}\nabla\cdot(T\pmb{\Gamma}) = \frac{P_{ext,T}}{N}f(r) -  [E_{ion_2}\langle\sigma v\rangle_{ion_2}(T) + E_{rec}\langle \sigma v\rangle_{rec}(T) + E_{rad}^0\langle\sigma v\rangle_{rad}^i(T)]n(r)^2 \nonumber \\ &+& [E_{ion}\langle\sigma v\rangle_{ion}(T)+ E_{rad}^i\langle\sigma v\rangle_{rad}^0(T)]n_0n(r) + Q_{ei}(r)
+  \nabla\cdot\textbf{q} &+& \frac{3}{2}\nabla\cdot(T\pmb{\Gamma}) = \frac{P_{ext,T}}{N}f(r) -  [E_{ion_2}\langle\sigma v\rangle_{ion_2}(T) + E_{rec}\langle \sigma v\rangle_{rec}(T) - E_{rad}^0\langle\sigma v\rangle_{rad}^i(T)]n(r)^2 \nonumber \\ &+& [E_{ion}\langle\sigma v\rangle_{ion}(T)+ E_{rad}^i\langle\sigma v\rangle_{rad}^0(T)]n_0n(r) - Q_{ei}(r)
 \end{eqnarray}
 
 Extendiendo la expresi\'on que ya habiamos trabajado \eqref{eq:Qie2}
@@ -109,7 +109,7 @@ Ahora, trabajaremos el lado izquierdo de la expresi\'on. Para el primer t\'ermin
 Ahora desarrollando $\kappa_\perp$ que es de la forma \cite{helander2005}
 
 \begin{eqnarray} 
-  \kappa_\perp(r) = 4.66\frac{nT}{m\omega^2\tau} = 4.66\frac{nT}{m\omega^2}\frac{n\ln\Lambda}{\gamma T^{3/2}} = \frac{4.66}{\gamma m\omega^2}\frac{n^2(r)}{T^{1/2}(r)}\ln\left[\alpha \frac{T^{3/2}(r)}{n^{1/2}(r)}\right]
+  \kappa_\perp(r) = 4.66\frac{nT}{m\omega^2\tau_{ei}} = 4.66\frac{nT}{m\omega^2}\frac{n\ln\Lambda}{\gamma T^{3/2}} = \frac{4.66}{\gamma m\omega^2}\frac{n^2(r)}{T^{1/2}(r)}\ln\left[\alpha \frac{T^{3/2}(r)}{n^{1/2}(r)}\right]
 \end{eqnarray}
 
 donde $\omega$ es la frecuencia ciclotr\'onica de los electrones. Ahora, trabajando el segundo t\'ermino
@@ -129,7 +129,7 @@ Finalmente la expresi\'on final de la ecuaci\'on para el flujo de energ\'ia es
 
 \begin{eqnarray}
  -\frac{4.66}{\gamma m\omega^2}\frac{1}{r}\partial_r\left\{r \frac{n^2(r)}{T^{1/2}(r)}\ln\left[\alpha \frac{T^{3/2}(r)}{n^{1/2}(r)}\right] \partial_r T(r)\right\} - \frac{3}{4\gamma m\omega^2}\frac{\ln\left[\alpha n^{-1/2}(r)T^{3/2}(r)\right]}{T^{1/2}(r)}\partial_r n^2(r)\partial_r T(r) \nonumber + \nonumber\\
- \frac{3}{2}T(r)\nabla\cdot\Gamma =  \frac{P_{ext,T}}{N}f(r) -  [E_{ion_2}\langle\sigma v\rangle_{ion_2}(T) + \frac{3}{2}T(r)\langle\sigma v\rangle_{rec}(T) + E_{rad}^0\langle\sigma v\rangle_{rad}^i(T)]n(r)^2 \nonumber \\ + [E_ion\langle\sigma v\rangle_{ion}(T)+ E_{rad}^i\langle\sigma v\rangle_{rad}^0(T)]n_0n(r) + \varpi\frac{n^2(r)}{T^{1/2}(r)}\ln\left[\alpha \frac{T^{3/2}(r)}{n^{1/2}(r)}\right]\label{eq:EnergyEq}
+ \frac{3}{2}T(r)\nabla\cdot\Gamma =  \frac{P_{ext,T}}{N}f(r) -  [E_{ion_2}\langle\sigma v\rangle_{ion_2}(T) + \frac{3}{2}T(r)\langle\sigma v\rangle_{rec}(T) + E_{rad}^0\langle\sigma v\rangle_{rad}^i(T)]n(r)^2 \nonumber \\ - [E_ion\langle\sigma v\rangle_{ion}(T)+ E_{rad}^i\langle\sigma v\rangle_{rad}^0(T)]n_0n(r) - \varpi\frac{n^2(r)}{T^{1/2}(r)}\ln\left[\alpha \frac{T^{3/2}(r)}{n^{1/2}(r)}\right]\label{eq:EnergyEq}
 \end{eqnarray}
 
 De momento tenemos planteadas las ecuaciones necesarias para encontrar la Temperaturay densidad en t\'erminos una de la otra, es posible que falten ecuaciones para cerrar el sistema, pero de momento las Ecs. \eqref{eq:particleEq} y \eqref{eq:EnergyEq} parecen bastar para encontrar la densidad $n$ en funci\'on de la temperatura. Ahora es crucial modelar las razones de eventos en el plasma y las condiciones de frontera. En el siguiente apartado nos encargaremos de modelar las razones para completar las ecuaciones en t\'erminos de la temperatura, densidad y radio \'unicamente.
