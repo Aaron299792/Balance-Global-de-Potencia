@@ -29,6 +29,40 @@ A partir de ahora trabajaremos con los electrones en el plasma y dejaremos de la
 		\caption{Plasma Cil\'indrico con campo uniforme y transporte radial de part\'iculas y energ\'ia}
 	\end{figure}
 
+  Sin embargo, la geometr\'ia que usualmente queremos trabajar es una toroidal ya sea para un Tokamak o un Stellerator. Desde un punto de vista topol\'ogico simplemente podemos doblar el cil\'indro sobre si mismo y obtendremos la geometr\'ia deseada (ve\'ase la Figura \ref{fig:tor}), sin embargo, esto tiene implicaciones sobre el campo magn\'etico y el transporte en el plasma, tambi\'en sobre el confinamiento. En resumen, la complejidad del problema supera por mucho las consideraciones que hemos hecho hasta el momento. Sin embargo, parte del pr\'oposito de este trabajo es ver que tanto difieren los resultados y bajo que r\'egimenes la aproximaci\'on es est\'a dentro de la tolerancia y permite explicar, al menos de forma cualitativa el comportamiento de la densidad y la temperatura del plasma. 
+
+  \begin{figure}[htb!]
+    \centering
+  	\begin{tikzpicture}
+		\begin{axis}[
+			view={180}{50}, % Viewing angle
+			hide axis, % Hide the axes
+			samples=40, % Number of samples in the x direction
+			samples y=40, % Number of samples in the y direction
+			domain=0:360,
+			y domain=130:360,
+			z buffer=sort, % Improve 3D rendering
+			colormap name=viridis
+			]
+			\addplot3[
+			thin,
+			surf,
+			shader=flat,
+			opacity=0.5, % Add some transparency
+			mesh/rows=40, % Match the number of samples
+			mesh/cols=40 % Match the number of samples y
+			]
+			(
+			{(2 + cos(x)) * cos(y)}, 
+			{(2 + cos(x)) * sin(y)}, 
+			{sin(x)}
+			);
+		\end{axis}
+	\end{tikzpicture}
+    \caption{Geometr\'ia toroidal de los dispositivos de confinamiento de plasma que se puede ver como el doblamiento del cil\'indro.}
+    \label{fig:tor}
+  \end{figure}
+
 Se pueden ver que finalmente las relaciones de transporte radial, o flujo de part\'iculas y energ\'ia se pueden escribir como
 
   \begin{eqnarray}
