@@ -1,5 +1,0 @@
-\babel@toc {spanish}{}\relax 
-\contentsline {section}{\numberline {1}Plasma Parcialmente Ionizados}{1}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Secciones efectivas, Camino libre medio y Frecuencias de Colisi\'on}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Grado de ionizaci\'on en Equilibrio Coronal}{3}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Radiaci\'on}{4}{subsection.1.3}%
