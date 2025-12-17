@@ -1,0 +1,119 @@
+\section{Physics-Informed Neural Networks (PINNs)}
+
+Las redes neuronales (NN), han ganado popularidad a lo largo de la última década debido a su capacidad de discernir entre patrones complejos y su capacidad de hacer predicciones con datos de entrada. Mediante un proceso de entrenamiento, NNs ajustan parámetros internos para minimizar el error entre los datos predichos y las salidas correctas, lo que permite que aprendan de manera efectiva de ejemplos en su base de datos.
+
+Las PINNs son una nueva variante de NNs clásicas desarrolladas para el caso especifico de la resolución de ecuaciones diferenciales \cite{sophiya2025} . Los métodos toman ventaja de capacidad de aproximación de las NNs y transforman el problema de resolver una ecuación diferencial a un problema de optimización. Usando funciones de perdida diseñadas de tal manera que contengan diferentes factores asociados al problema, como las condiciones iniciales o de frontera, así como restricciones físicas impuestas por leyes de conservación dentro del problema. 
+
+Las PINNs aceptan puntos de entrada dentro de la región de integración y generan estimaciones de la solución basadas en ese punto para un ecuación dada.  El esquema desarrollado por \cite{raissi2019} introduce el concepto de lo que hoy se conoce como \textit{Vanilla - PINNs}. La idea principal surge de aprovechar la capacidad de NNs como aproximadores globales de funciones. El método a grandes rasgos se basa en el entrenamiento de algoritmos de \textit{Deep Learning} que identifiquen correctamente mapeos no lineales de datos de entrada y salida que explotan la capacidad de autoderivación que se han desarrollado en los ultimos años, la cual consiste en diferenciar usando NNs respecto a sus entradas y parámetros del modelo para obtener redes neuronales fisicamente informadas (\textit{Physics Informed Neural Networks}). Se puede atacar un problema no lineal directamente sin la necesidad de comprometerse con determinadas condiciones iniciales. Estas técnicas se diferencian en principio a los métodos numéricos tradicionales, ya que no requieren la discretización del espacio más bien, utilizan puntos de muestreo para las soluciones. 
+
+
+Las redes neuronales están restringidas respecto a la simetría del problema, las invarianzas, o conservación de cantidades que tienen origen en principios físicos, que gobiernan los datos observados. Hay dos clases de problemas principales, la solución o el descubrimiento de ecuaciones diferenciales determinadas por datos. 
+
+\subsection{Funciones de Perdida}
+
+Primero consideremos el caso más general \footnote{este caso no es el que nos planteamos resolver el cual es un caso mucho más específico y delimitado}, una caso dinámico con ecuaciones diferenciales parciales PDEs. La representación más general de está ecuación está dada por, 
+
+\begin{eqnarray}
+	f\left(x, t, \partial_x y, \partial_t y, \dots; \Psi\right) &=& 0 \quad x \in \Omega, t  \in [0, T] \\
+	y(x, t_0) &=& h(x) \quad x \in \Omega \\
+	y(x,t) &=& g(t) \quad x \in \partial\Omega, t \in [0,T]
+\end{eqnarray}
+
+definido en un dominio $\Omega \in \mathbb{R}^N$  con frontera $\partial\Omega$. Donde $x = (x_1, x_2, \dots, x_N) \in \mathbb{R}^N$, representa las coordenadas espaciales, y $t$ una coordenada temporal. $f$ es la función que describe el problema con operadores diferenciales y un parámetro $\Psi$ .  Donde $y(x,t)$ es la solución de la PDE con la condición inicial $g(t)$ y la condición de frontera $h(x)$ que puede ser de Dirichlet, Neumann, de Robin o condiciones periódicas. Usando NNs se construye $\hat{y}(x,t; \theta)$ con $\theta$ representando pesos y vectores de sesgo (\textit{bias vectors}) en la NN, que intenta imitar el comportamiento de $y(x,t)$ tal que
+
+\begin{equation}
+	y(x,t) \approx \hat{y}(x,t; \theta)
+\end{equation}
+
+Para minimizar la divergencia entre la predicción y la solución deseada, se construye una función de perdida basada en las ecuaciones del modelo físico en estudio, así como condiciones iniciales y de frontera. Se usa Diferenciación automática para calcular las derivadas parciales de $\hat{y}(x,t;\theta)$ respecto a los datos de entrada usados en la PDE. La función de perdida puede ser expresada por sumas pesadas de la norma $L_2$ del residuo de la PDE, condiciones de frontera y condiciones iniciales. La función general de perdida es entonces optimizada usando optimizados basados en gradientes, popularmente el \texttt{Adam} y el algoritmo \texttt{LBFGS}, para determinar el parámetro $\Theta$ que disminuye el error computacional.
+
+\begin{equation}
+	\mathcal{L}(\Theta) = \omega_f\mathcal{L}_f(\theta) + omega_{ic}\mathcal{L}_{ic}(\theta) + omega_{bc}\mathcal{L}_{bc}(\theta)
+\end{equation}
+
+con 
+
+\begin{eqnarray}
+	\mathcal{L}_f(\theta) = \frac{1}{N_f}\sum\limits_{i = 1}^{N_f} \big{||} f(x,t, \partial_x\hat{y},\partial_t\hat{y}, \dots; \Psi)\big{||}_2^2, \\ \nonumber \\
+	\mathcal{L}_{ic}(\theta) = \frac{1}{N_{ic}}\sum\limits_{i = 1}^{N_{ic}} \big{||} \hat{y}(x,t_0) - h(x) \big{||}_2^2, \\ \nonumber \\
+	\mathcal{L}_{bc}(\theta) = \frac{1}{N_{bc}}\sum\limits_{i = 1}^{N_{bc}} \big{||} \hat{y}(x,t) - g(t) \big{||}_2^2
+\end{eqnarray}
+
+donde, $N_i$ y $\omega_i$ son los puntos de colocación y los pesos respectivamente, para cada caso.
+
+\begin{figure}[htb!]
+\centering
+\resizebox{\textwidth}{!}{
+\usetikzlibrary{arrows.meta, positioning}
+
+\begin{tikzpicture}[
+    box/.style={
+        draw,
+        rounded corners,
+        align=center,
+        minimum width=4.2cm,
+        minimum height=1.3cm
+    },
+    arrow/.style={->, thick},
+    node distance=1.7cm
+]
+
+% ODE system
+\node[box] (ode) {
+\textbf{Nonlinear Inhomogeneous ODE System}\\[4pt]
+$\mathcal{N}[\mathbf{x}(r)]=\mathbf{f}(\mathbf{x}(r),r)+\mathbf{g}(r)$\\ \\
+$\mathbf{x}(R)=\mathbf{x}_R$\\ \\
+$\frac{d\mathbf{x}(R)}{dr} = \frac{d\mathbf{x}}{dr}\big{|}_R $
+};
+
+% PINN
+\node[box, right=of ode, minimum height=3.8cm] (pinn) {
+\textbf{Physics--Informed Neural Network}\\[6pt]
+$r \;\mapsto\; \hat{\mathbf{x}}(r;\boldsymbol{\theta})$\\[6pt]
+Fully--connected neural network
+};
+
+% Residuals
+\node[box, right=of pinn] (res) {
+\textbf{ODE Residuals}\\[4pt]
+$\mathbf{R}(r)= \mathcal{N}[\mathbf{x}(r)]
+-\mathbf{f}(\hat{\mathbf{x}}(r),r)
+-\mathbf{g}(r)$
+};
+
+% Total loss
+\node[box, below=of res] (loss) {
+\textbf{Total Loss Function}\\[4pt]
+$L(\boldsymbol{\theta})
+=\mathbb{E}_{t}\!\left[\|\mathbf{R}(t)\|^2\right]
++\lambda L_{\mathrm{BC}}$
+};
+
+% Initial condition loss
+\node[box, below=of loss] (bc) {
+\textbf{Boundary Condition Loss}\\[4pt]
+$L_{\mathrm{BC}}
+=\left\|\hat{\mathbf{x}}(R)-\mathbf{x}_R\right\|^2 + \left\|\frac{d\hat{\mathbf{x}}(R)}{dr} - \frac{d\mathbf{x}}{dr}\big{|}_{R}\right\|^2$
+};
+
+% Optimizer
+\node[box, below=0.5cm of pinn] (opt) {
+\textbf{Optimizer}\\[4pt]
+Adam / L--BFGS
+};
+
+% Connections
+\draw[arrow] (ode) -- (pinn);
+\draw[arrow] (pinn) -- (res);
+\draw[arrow] (res) -- (loss);
+\draw[arrow] (bc) -- (loss);
+\draw[arrow] (loss) -- (opt);
+\draw[arrow] (opt) -- (pinn);
+
+\end{tikzpicture}
+}
+\caption{Esquematización de la implementación de PINNs para la resolución de las ecuaciones \eqref{eq:particleEq} y \eqref{eq:EnergyEq} planteadas para el modelo 1D de transporte clásico en un plasma cilíndrico.}
+\label{fig:pinn_ode}
+\end{figure}
+
+
