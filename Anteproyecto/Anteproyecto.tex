@@ -1,0 +1,72 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}	% Para caracteres en español
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{multirow,booktabs}
+\usepackage[table]{xcolor}
+\usepackage{fullpage}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepgfplotslibrary{colormaps}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usetikzlibrary{3d}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{calc}
+\usepackage{multicol}
+%\usepackage[spanish]{babel}
+\usepackage{cancel}
+\usepackage[retainorgcmds]{IEEEtrantools}
+\usepackage{geometry}
+\usepackage{amsmath}
+\newlength{\tabcont}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\usepackage{empheq}
+\usepackage{framed}
+\usepackage{caption,subcaption}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\colorlet{shadecolor}{orange!15}
+\parindent 0in
+\parskip 12pt
+\geometry{margin=1in, headsep=0.25in}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{reg}{Rule}
+\newtheorem{exer}{Exercise}
+\newtheorem{note}{Note}
+\newcommand{\identity}{1\kern-0.25em\text{l}}
+\newcommand{\todoitem}[1]{\item[$\Box$] #1}    % Unchecked box
+\newcommand{\doneitem}[1]{\item[$\CheckedBox$] #1}  % Checked box (from amssymb)
+
+\pagenumbering{arabic}
+
+\title{Anteproyecto}
+\author{Aaron Sanabria Mart\'inez\footnote{aaron.sanabria@ucr.ac.cr} \\ Tutor: Ricardo Solano Piedra\footnote{risolano@itcr.ac.cr}}
+
+\begin{document}
+\maketitle
+	%\thispagestyle{empty}
+	\section{Objetivos}
+		\subsection{Objetivo General}
+		Implementar una Red Neuronal Informada por la Física (PINN) para la determinación de los perfiles radiales de densidad electrónica y temperatura electrónica en un plasma magnetizado cilíndrico que exhibe transporte clásico perpendicular al campo magnético.
+		
+		\subsection{Objetivos Específicos}
+		\begin{enumerate}
+			\item Formular las ecuaciones que relacionan la densidad electrónica y temperatura electrónica a partir de la teoría de transporte clásico perpendicular al campo magnético para la base del diseño de la PINN.
+			\item Diseñar la arquitectura de la PINN de acuerdo al modelo teórico mediante la definición de las capas, las funciones de activación y los hiperparámetros esenciales de la red. 
+			\item  Validar los resultados de la PINN con una comparación de los perfiles obtenidos experimentales del  [Dispositivo Nombre] para evaluar el grado de fidelidad y precisión del modelo computacional implementado. 
+		\end{enumerate}
+	
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %\bibliographystyle{IEEEtran}
+  %\bibliography{references.bib}
+\end{document}
