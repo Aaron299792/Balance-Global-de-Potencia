@@ -118,11 +118,11 @@ nofootinbib]{revtex4}
 
 \section{Introducción} 
 
-El \textit{deep learning} DL se ha integrada a la física por su capacidad de representar funciones complejas y aprender estructuras de relaciones matemáticas \cite{carleo2019}. Dentro de estas, las redes neuronales NNs destacan por su capacidad para aproximar funciones postulándolas como una opción para la resolución de sistemas diferenciales \cite{lagaris1998}.  Las redes neuronales informadas por la física PINNs permiten tratar sistemas complejos de ecuaciones diferenciales usando restricciones físicas para obtener soluciones. Herramientas como la auto-diferenciación permiten introducir las ecuaciones diferenciales EDs y sus condiciones de frontera como funciones de penalización que restringen el espacio de soluciones y explotan la capacidad de aproximación de las redes neuronales NNs \cite{raissi2019, baydin2018}.
+El \textit{deep learning} DL se ha integrado a la física por su capacidad de representar funciones complejas y aprender estructuras de relaciones matemáticas \cite{carleo2019}. Dentro de estas, las redes neuronales NNs destacan por su capacidad para aproximar funciones postulándolas como una opción para la resolución de sistemas diferenciales \cite{lagaris1998}.  Las redes neuronales informadas por la física PINNs permiten tratar sistemas complejos de ecuaciones diferenciales usando restricciones físicas para obtener soluciones. Herramientas como la auto-diferenciación permiten introducir las ecuaciones diferenciales EDs y sus condiciones de frontera como funciones de penalización que restringen el espacio de soluciones y explotan la capacidad de aproximación de las redes neuronales NNs \cite{raissi2019, baydin2018}.
 
-Hay un campo en la física que presenta no linealidad y acoplamiento en las ecuaciones que lo rigen. La dinámica de los plasmas está influenciado por interacciones electromagnéticas \cite{helander2005}. Estos sistemas son complejos debido a su comportamiento colectivo y una dinámica con múltiples regímenes de colisión que llevan al transporte de partículas \cite{goldston1995}. La descripción de fluidos del plasma da un sistema cerrado de ecuaciones diferenciales parciales PDEs que puede ser modelado con  teoría de transporte clásico \cite{freidberg2014}. Pese a que estos sistemas pueden ser reducidos a uno de ecuaciones diferenciales ordinarias ODEs con modelos 1D, siguen siendo complejos de tratar\cite{lechte2002, alves2018}.
+Hay un campo en la física que presenta no linealidad y acoplamiento en las ecuaciones que lo rigen. La dinámica de los plasmas está influenciado por interacciones electromagnéticas \cite{helander2005}. Estos sistemas son complejos debido a su comportamiento colectivo y una dinámica con múltiples regímenes de colisión que llevan al transporte de partículas \cite{goldston1995}. La descripción de fluidos del plasma da un sistema cerrado de ecuaciones diferenciales parciales PDEs que puede ser modelado con  una teoría de transporte clásico \cite{freidberg2014}. Pese a que estos sistemas pueden ser reducidos a uno de ecuaciones diferenciales ordinarias ODEs con modelos 1D, siguen siendo complejos de tratar\cite{lechte2002, alves2018}.
 
-Los coeficientes y los términos fuentes en los sistemas de EDs que aparecen en los modelos de transporte colisional no son constantes, además son no lineales por lo que el uso de PINNs es una buen método por su capacidad de integrar y representar la no linealidad \cite{zhong2022}. Por ejemplo, se han implementado PINNs para la resolución de ecuaciones unidimensionales del transporte de plasma a bajas temperaturas\cite{zhong2022, trieschmann2023}. Esquemas de PINNs aplicados en el transporte en Tokamaks han sido comparados con métodos tradicionales de diferencias finitas en la resolución de PDEs con beneficios como reducción en el tiempo de convergencia \cite{seo2024}. En el transporte turbulento para encontrar campos consistentes con las ecuaciones del fluido doble de Braginskii \cite{mathews2021}. La determinación de los perfiles electrónicos de densidad y temperatura en plasma magnetizado usando modelos 1D bajo modelos de transporte clásico se plantea resolver en este trabajo.
+Los coeficientes y los términos fuentes en los sistemas de EDs que aparecen en los modelos de transporte colisional no son constantes además de no lineales, por lo que el uso de PINNs es una buen método por su capacidad de integrar y representar la no linealidad \cite{zhong2022}. Por ejemplo, se han implementado PINNs para la resolución de ecuaciones unidimensionales del transporte de plasma a bajas temperaturas\cite{zhong2022, trieschmann2023}. Esquemas de PINNs aplicados en el transporte en Tokamaks han sido comparados con métodos tradicionales de diferencias finitas en la resolución de PDEs con beneficios como reducción en el tiempo de convergencia \cite{seo2024}. En el transporte turbulento para encontrar campos consistentes con las ecuaciones del fluido doble de Braginskii \cite{mathews2021}. La determinación de los perfiles electrónicos de densidad y temperatura en plasma magnetizado usando modelos 1D bajo modelos de transporte clásico se plantea resolver en este trabajo.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -146,7 +146,7 @@ En la figura \ref{fig:mpl} se muestra el esquema general de lo que es un MLP.
 
 Las entradas, salidas y transformaciones en las NNs se guardan en tensores que almacenan los parámetros e híper-parámetros de la MLP, así como el grafo de computo de las operaciones sobre ellos y sus derivadas locales. Esto da paso al concepto de \textbf{autodiferenciación} AD.
 
-AD es un método de diferenciación que parte del principio de que toda operación computacional puede ser descompuesta en operaciones elementales con derivadas conocidas. Aplicando la regla de la cadena al grafo de cómputo, se obtiene la derivada en dos maneras, \textbf{diferenciación hacia adelante} donde se parte de las entradas y propaga las derivadas hacia las salidas y  \textbf{diferenciación hacia atrás} que parte de las salidas y propaga las derivadas hacia todos los parámetros del modelo \cite{baydin2018}. La función de activación debe ser diferenciable en los puntos donde se aplica AD para evitar problemas con las derivadas.
+AD es un método de diferenciación que parte del principio de que toda operación computacional puede ser descompuesta en operaciones elementales con derivadas conocidas. La función de activación debe ser diferenciable en los puntos donde se aplica AD para evitar problemas con las derivadas.
 
 \subsubsection{Funciones de pérdida y PINNs}
 
@@ -156,18 +156,18 @@ Las NNs requieren tanto de los parámetros $\bm{\theta}$ como de los híper-par�
 
 \subsubsection{Optimizadores}
 
-Los algoritmos de optimización modernos parten del algoritmo de \textbf{descenso por gradiente} GD, donde se usa la dirección opuesta al gradiente de $\mathcal{L}(\bm{\theta})$ y un híper-parámetro llamado \textbf{tasa de aprendizaje} $\eta$ que es el tamaño del paso usado, para actualizar de forma iterativa los parámetros de la red tal que $\bm{\theta} \rightarrow \bm{\theta} - \eta\nabla_\theta \mathcal{L}$. El método es en general lento, pero es la base de algoritmos más eficientes. 
+Los algoritmos de optimización modernos parten del algoritmo de \textbf{descenso por gradiente} GD, donde se usa la dirección opuesta al gradiente de $\mathcal{L}(\bm{\theta})$ y un híper-parámetro llamado \textbf{tasa de aprendizaje} $\eta$ que es el tamaño del paso usado. Es la base de algoritmos más eficientes. 
 
 Los algoritmos basados en GD pueden desvanecerse o explotar. Esto se previene controlando la varianza de las señales que se pasan a la NN al \textbf{inicializar} los parámetros con valores aleatorios de una distribución uniforme o normal. El inicializador \textbf{Xavier} trata las derivadas de la función de perdida como variables aleatorias \cite{glorot2010}.
 
-El estimador adaptativo de momentos \textbf{Adam} está basado en gradientes estocásticos de primer orden donde las $\eta$ son adaptativas. Se introducen momentos que guardan el historial del gradiente $\nabla_{\bm{\theta}} \mathcal{L}$. Los momentos son las medias móviles exponenciales del gradiente, el primer momento y del cuadrado del gradiente, el segundo momento. El método es robusto para tratar problemas dispersos y con ruido \cite{kingma2017}.
+El estimador adaptativo de momentos \textbf{Adam} está basado en gradientes estocásticos de primer orden donde las $\eta$ son adaptativas. Se introducen momentos que guardan el historial del gradiente $\nabla_{\bm{\theta}} \mathcal{L}$. El método es robusto para tratar problemas dispersos y con ruido \cite{kingma2017}.
 
-El algoritmo de memoria limitada Broyden-Fletcher-Goldfarb-Shanno \textbf{L-BFGS} es un método de memoria cuasi-newtoniano de segundo orden que estima la matriz hessiana de $\mathcal{L}(\bm{\theta})$ respecto a los parámetros sin calcular todos los elementos de la matriz, cerca de un mínimo la convergencia es más rápida que en métodos de primer orden. El costo computacional escala con el número de gradientes almacenados y no con el número de parámetros. 
+El algoritmo de memoria limitada Broyden-Fletcher-Goldfarb-Shanno \textbf{L-BFGS} es un método de memoria cuasi-newtoniano de segundo orden que estima la matriz hessiana de $\mathcal{L}(\bm{\theta})$ respecto a los parámetros sin calcular todos los elementos de la matriz, cerca de un mínimo la convergencia es más rápida que en métodos de primer orden. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Plasmas magnetizados y teoría clásica de transporte perpendicular}
 
-Un \textbf{plasma} es un gas ionizado que presenta comportamiento colectivo y cuasi-neutralidad. La dinámica del plasma está gobernada por interacciones electromagnéticas de largo alcance tanto por campos que se generan a nivel interno como por campos exteriores. La teoría de transporte colisional estudia el transporte de partículas, momento y energía  en un régimen dominado por colisiones elásticas e inelásticas entre las especies del plasma que determinan el transporte y los procesos atómicos. Cuando partículas, momento y energía se transportan en dirección perpendicular a un campo magnético establecido en el plasma se alude al concepto de \textbf{transporte perpendicular}. La teoría de transporte clásico estudia la contribución de las colisiones al transporte perpendicular en un plasma magnetizado \cite{helander2005}.
+Un \textbf{plasma} es un gas ionizado que presenta comportamiento colectivo y cuasi-neutralidad. La dinámica del plasma está gobernada por interacciones electromagnéticas de largo alcance tanto por campos que se generan a nivel interno como por campos exteriores. La teoría de transporte colisional estudia el transporte de partículas, momento y energía  en un régimen dominado por colisiones. Cuando partículas, momento y energía se transportan en dirección perpendicular a un campo magnético establecido en el plasma se alude al concepto de \textbf{transporte perpendicular}. La teoría de transporte clásico estudia la contribución de las colisiones al transporte perpendicular en un plasma magnetizado \cite{helander2005}.
 
 \subsubsection{Ecuación Cinética de Boltzmann}
 
@@ -193,7 +193,7 @@ con $W_\alpha$ la densidad de energía del sistema, $\bm{Q}_\alpha$ el flujo de 
 
 \subsubsection{Colisiones y procesos atómicos en el plasma}
 
-Las colisiones en el plasma producen procesos atómicos como la ionización, radiación, recombinación y colisiones de Coulomb. Esto se traduce en términos de fuente y sumideros como en las ecuaciones \eqref{eq:partflux} y \eqref{eq:energy}. Cada proceso puede modelarse como \cite{goldston1995}
+Los términos de fuente y sumideros en las ecuaciones \eqref{eq:partflux} y \eqref{eq:energy} se relacionan con procesos atómicos y pueden modelarse como \cite{goldston1995}
 \begin{eqnarray*}
 	S_\text{proceso} &=& n_\alpha n_\beta \langle \sigma v \rangle_\text{proceso}\\
 	P_\text{proceso} &=& E_\text{proceso} n_\alpha n_\beta \langle \sigma v \rangle_\text{proceso} 
@@ -213,7 +213,7 @@ En los procesos de calentamiento se debe considerar el esfuerzo viscoso en el pl
  
  \subsubsection{Parámetros característicos del plasma}
  
- El radio de Debye $\lambda_D = \sqrt{\epsilon_0 T / n_e e^2}$ es una distancia en la que el potencial de Coulomb se ve apantallado por comportamiento colectivo de las partículas. Con $\lambda_D$ y el parámetro de impacto mínimo $b_\text{min}$ se define la cantidad $\Lambda \equiv \lambda_D/ b_\text{min} = 4\pi \epsilon^{3/2} e^{-3} T_e^{3/2} n_e^{-1/2}$ \cite{goldston1995, helander2005}. Suele aparecer como $\ln{\Lambda}$ bajo el nombre de logaritmo de Coulomb. Se define el tiempo de relajación $\tau_{\alpha, \beta}$ que es el periodo típico entre colisiones electrónicas
+ El radio de Debye $\lambda_D = \sqrt{\epsilon_0 T / n_e e^2}$ es una distancia en la que el potencial de Coulomb se ve apantallado por comportamiento colectivo de las partículas. Con $\lambda_D$ y el parámetro de impacto mínimo $b_\text{min}$ se define la cantidad $\Lambda \equiv \lambda_D/ b_\text{min} = 4\pi \epsilon^{3/2} e^{-3} T_e^{3/2} n_e^{-1/2}$ \cite{goldston1995, helander2005}. Se define el tiempo de relajación $\tau_{\alpha, \beta}$ que es el periodo típico entre colisiones electrónicas
 \begin{equation*}
 	\tau_{e, i}^{-1} = \left(\frac{e^2}{4\pi\epsilon_0}\right)^2 \frac{8\sqrt{2\pi m_e n_e}}{3 m_i}\frac{\ln{\Lambda}}{T_e^{3/2}}
 \end{equation*}
@@ -228,7 +228,7 @@ con $\omega_e$ es la frecuencia ciclotrónica del electrón.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Planteamiento del Problema}
 
-Las PINNs se han implementado en el estudio de transporte \cite{mathews2021, seo2024}, pero  no se ha reportado su uso para el caso del transporte perpendicular para una geometría cilíndrica en la solución de las ecuaciones de fluido de Braginskii como un problema de ODEs con coeficientes dependientes de los perfiles. Las PINNs integran la no linealidad y la física al problema directamente en las funciones de pérdida usando AD sin uso de grillas. En este contexto se plantea si es posible obtener una solución usando únicamente estas restricciones y si los perfiles obtenidos constituyen una primera aproximación a los perfiles electrónicos $n$ y $T$ en el dispositivo RTP.
+No se ha reportado el uso de PINNs para el caso del transporte perpendicular para una geometría cilíndrica en la solución de las ecuaciones de fluido de Braginskii como un problema de ODEs con coeficientes dependientes de los perfiles. Las PINNs integran la no linealidad y la física al problema directamente en las funciones de pérdida usando AD sin uso de grillas. En este contexto se plantea si es posible obtener una solución usando únicamente estas restricciones y si los perfiles obtenidos constituyen una primera aproximación a los perfiles electrónicos $n$ y $T$ en el dispositivo RTP.
 
 \section{Objetivo General}
 
@@ -293,6 +293,7 @@ Dentro de \eqref{eq:odesys} aparecen términos de disipación de energía y part
 A partir de $n(r)$ y $T(r)$ de la PINN se compararán con perfiles medidos para el dispositivo RTP en los disparos $\#96040237$, $\#97052261$ y $\#97053056$. Se promediarán temporalmente para obtener perfiles estacionario. Los datos serán obtenidos de la base de datos IMDB \cite{roach2008} usando MDSPlus \cite{stillerman1997}.
 
 \section{Cronograma}
+\vspace{-5mm}
 \begin{table}[h!]
 \caption{Cronograma de trabajo para el projecto de investigación.}
 \label{tab:cronograma}
