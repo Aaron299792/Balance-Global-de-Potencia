@@ -102,7 +102,7 @@ nofootinbib]{revtex4}
 \email          {aaron.sanabria@ucr.ac.cr}
 \author         {Ricardo Solano Piedra- supervisor}
 \email          {risolano@itcr.ac.cr}
-\affiliation    {Escuela de Física, Universidad de Costa Rica}
+\affiliation    {Escuela de Física, Universidad de Costa Rica. Sede Rodrigo Facio \\ Escuela de Física, Instituto Tecnológico de Costa Rica. Campus Cartago}
 \date{\today} %la fecha sale de forma automática
 
 %\begin{abstract}
@@ -122,15 +122,14 @@ El \textit{deep learning} DL se ha integrado a la física por su capacidad de re
 
 Hay un campo en la física que presenta no linealidad y acoplamiento en las ecuaciones que lo rigen. La dinámica de los plasmas está influenciado por interacciones electromagnéticas \cite{helander2005}. Estos sistemas son complejos debido a su comportamiento colectivo y una dinámica con múltiples regímenes de colisión que llevan al transporte de partículas \cite{goldston1995}. La descripción de fluidos del plasma da un sistema cerrado de ecuaciones diferenciales parciales PDEs que puede ser modelado con  una teoría de transporte clásico \cite{freidberg2014}. Pese a que estos sistemas pueden ser reducidos a uno de ecuaciones diferenciales ordinarias ODEs con modelos 1D, siguen siendo complejos de tratar\cite{lechte2002, alves2018}.
 
-Los coeficientes y los términos fuentes en los sistemas de EDs que aparecen en los modelos de transporte colisional no son constantes además de no lineales, por lo que el uso de PINNs es una buen método por su capacidad de integrar y representar la no linealidad \cite{zhong2022}. Por ejemplo, se han implementado PINNs para la resolución de ecuaciones unidimensionales del transporte de plasma a bajas temperaturas\cite{zhong2022, trieschmann2023}. Esquemas de PINNs aplicados en el transporte en Tokamaks han sido comparados con métodos tradicionales de diferencias finitas en la resolución de PDEs con beneficios como reducción en el tiempo de convergencia \cite{seo2024}. En el transporte turbulento para encontrar campos consistentes con las ecuaciones del fluido doble de Braginskii \cite{mathews2021}. La determinación de los perfiles electrónicos de densidad y temperatura en plasma magnetizado usando modelos 1D bajo modelos de transporte clásico se plantea resolver en este trabajo.
-
+Los coeficientes y los términos fuentes en los sistemas de EDs que aparecen en los modelos de transporte colisional no son constantes además de no lineales, por lo que el uso de PINNs es un buen método por su capacidad de integrar y representar la no linealidad \cite{zhong2022}. Por ejemplo, se han implementado PINNs para la resolución de ecuaciones unidimensionales del transporte de plasma a bajas temperaturas\cite{zhong2022, trieschmann2023}. Esquemas de PINNs aplicados en el transporte en Tokamaks han sido comparados con métodos tradicionales de diferencias finitas en la resolución de PDEs con beneficios como reducción en el tiempo de convergencia \cite{seo2024}. En el transporte turbulento para encontrar campos consistentes con las ecuaciones del fluido doble de Braginskii \cite{mathews2021}. Sin embargo, no se ha reportado la implementación de una PINN aplicada al transporte perpendicular en geometría cilíndrica bajo el modelo de Braginskii reducido a ODEs con coeficientes dependientes de los perfiles.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\vspace{-4 mm}
 \section{Marco Teórico}
 
 \subsection{Redes Neuronales Informadas por la física: fundamentos}
 
-Las \textbf{neuronas} artificiales son funciones matemáticas y son la estructura básica de las redes neuronales NNs. Las neuronas se conectan entre sí usando \textbf{capas} que toman de argumentos vectores de salidas de capas previas. Los perceptrones multicapa MLP son una NN completamente conectada donde la información fluye únicamente de la \textbf{capa de entrada} a la \textbf{capa de salida},  sin ciclos ni retroalimentación, i.e., $\mathcal{F} : X \rightarrow Y \quad \text{con} \quad \mathcal F = f^{(L)} \circ f^{(L-1)} \circ \dots \circ f^{(1)}$ con $X$ es el espacio de entradas y $Y$ el espacio de salidas. Cada \textbf{capa} aplica una transformación afín seguida de una \textbf{activación} no lineal por la función $\sigma(\cdot)$ que debe ser diferenciable.
+Las \textbf{neuronas} artificiales son funciones matemáticas y son la estructura básica de las redes neuronales NNs. Las neuronas se conectan entre sí usando \textbf{capas} que toman como argumentos vectores de salida de las capas previas. Los perceptrones multicapa MLP son una NN completamente conectada donde la información fluye únicamente de la \textbf{capa de entrada} a la \textbf{capa de salida},  sin ciclos ni retroalimentación, i.e., $\mathcal{F} : X \rightarrow Y \quad \text{con} \quad \mathcal F = f^{(L)} \circ f^{(L-1)} \circ \dots \circ f^{(1)}$ con $X$ es el espacio de entradas y $Y$ el espacio de salidas. Cada \textbf{capa} aplica una transformación afín seguida de una \textbf{activación} no lineal por la función $\sigma(\cdot)$ que debe ser diferenciable.
 \begin{equation*}
 	f^{(k)}(\bm{x}_{k-1})  = \sigma(\bm{W}^{(k)}\bm{x}_{k -1 } + \bm{b}^{(k)})
 \end{equation*}
@@ -226,26 +225,26 @@ con $\omega_e$ es la frecuencia ciclotrónica del electrón.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Planteamiento del Problema}
+\section{Pregunta de Investigación}
 
-No se ha reportado el uso de PINNs para el caso del transporte perpendicular para una geometría cilíndrica en la solución de las ecuaciones de fluido de Braginskii como un problema de ODEs con coeficientes dependientes de los perfiles. Las PINNs integran la no linealidad y la física al problema directamente en las funciones de pérdida usando AD sin uso de grillas. En este contexto se plantea si es posible obtener una solución usando únicamente estas restricciones y si los perfiles obtenidos constituyen una primera aproximación a los perfiles electrónicos $n$ y $T$ en el dispositivo RTP.
+No se ha reportado el uso de PINNs para el caso del transporte perpendicular para una geometría cilíndrica en la solución de las ecuaciones de fluido de Braginskii como un problema de ODEs con coeficientes dependientes de los perfiles. Las PINNs integran la no linealidad y la física al problema directamente en las funciones de pérdida usando AD sin uso de grillas. 
+
+La pregunta en cuestión es entonces, ¿puede una PINN, basada únicamente en restricciones físicas, reproducir perfiles radiales de densidad y temperatura en un plasma magnetizado bajo transporte clásico con un nivel de precisión comparable a datos experimentales del dispositivo RTP?
 
 \section{Objetivo General}
-
 Implementar una Red Neuronal Informada por la Física (PINN) para la determinación de los perfiles radiales de densidad electrónica y temperatura electrónica en un plasma magnetizado cilíndrico que exhibe transporte clásico perpendicular al campo magnético.
-
+\vspace{- 4 mm}
 \subsection*{Objetivos específicos}
-
+\vspace{- 4 mm}
 \begin{enumerate}[noitemsep]
 			\item Formular las ecuaciones que relacionan la densidad electrónica y temperatura electrónica a partir de la teoría de transporte clásico perpendicular al campo magnético para la base del diseño de la PINN.
 			\item Diseñar la arquitectura de la PINN de acuerdo al modelo teórico mediante la definición de las capas, las funciones de activación y los híper-parámetros esenciales de la red. 
-			\item  Validar los resultados de la PINN con una comparación de los perfiles obtenidos experimentales del dispositivo RTP para evaluar el grado de fidelidad y precisión del modelo computacional implementado. 
+			\item  Evaluar cuantitativamente la precisión de la PINN mediante la comparación con perfiles experimentales del RTP utilizando métricas como error cuadrático medio (MSE) y análisis de consistencia física.
 		\end{enumerate}
 
 \section{Metodología}
 
 Para la derivación teórica de las ecuaciones que determinan los perfiles de densidad $n$ y temperatura $T$ electrónicos, se parte de las ecuaciones \eqref{eq:partflux}, \eqref{eq:energy} y de los siguientes supuestos:
-
 \begin{itemize}[noitemsep]
 \item Cuasi-neutralidad: $n_i \approx n_e$.
 \item Plasma débilmente ionizado: $n_e \ll n_0$.
@@ -271,9 +270,7 @@ A partir de ahora se omitirá la etiqueta $\alpha$ que caracteriza la especie. S
 \end{equation}
 
 donde $\lambda_n$ y $\lambda_T$ son las escalas características de decaimiento en $r = R$ y con $\bm{\Psi} = \{R, B, n_0, P_\text{ext}, \lambda_n, \lambda_T, \mu, \sigma\}$ el conjunto de parámetros libres del sistema. $R$, el radio del plasma cilíndrico. Las condiciones en $r = 0$ corresponden a la simetría axial del sistema. El orden dos es de esperar por las ecuaciones \eqref{eq:diffusion}
-
 \subsection{Implementación de la PINN}
-
 Se construirá una MLP inicializada con Xavier activada por una función $\tanh$. Consistirá de una capa de entrada $r$, múltiples capas ocultas $L$ y una capa de salida con dos neuronas $[\hat{n}(r; \bm{\theta}), \hat{T}(r; \bm{\theta})]$ en Python usando PyTorch \cite{pytorch} para construir la PINN. Se entrenará con GPUs del clúster de la Universidad de Costa Rica. Las funciones de pérdida serán puramente físicas de la forma \cite{raissi2019}:
 \begin{equation*}
 	\mathcal{L}(r; \bm{\theta}) = \omega_\mathcal{N} \mathcal{L}_\mathcal{N} (r; \bm{\theta})+ \omega_{bc} \mathcal{L}_{bc}(r; \bm{\theta})
@@ -285,19 +282,28 @@ con
 \end{eqnarray*}
 aquí $N_i$ y $\omega_i$ son los puntos de colocación y pesos  para las funciones de pérdida respectivamente que determinarán experimentalmente junto con $L$ para mejorar la convergencia . $\mathcal{L}_\mathcal{N}$ corresponde a la contribución de la restricción impuesta por las ODEs  $\mathcal{N} = (F,G)$ y sus condiciones de frontera $\mathcal{L}_{bc}$ por $f_{bc}(r_0) = 0$ evaluadas en los extremos $r_0 = 0$ y $r_0 = R$.
 
-Para optimizar la PINN se usará el esquema de dos optimizadores. Una primera optimización con Adam seguida de un refinamiento usando L-BFGS.
+Para optimizar los parámetros PINN se usará el esquema de dos optimizadores. Una primera optimización con Adam seguida de un refinamiento usando L-BFGS.
 
 Dentro de \eqref{eq:odesys} aparecen términos de disipación de energía y partículas relacionadas con las tasas $\langle \sigma v \rangle$, estas dependen de la temperatura y se determinan numéricamente de la base de datos ADAS con la librería \textit{Cherab v1.5} \cite{cherab} para un gas de Hidrógeno usado en los disparos elegidos del tokamak RTP.
-
+\vspace{- 5 mm}
+\subsubsection{Críterio de convergencia}
+\vspace{- 2 mm}
+Se utilizará como métrica principal el error cuadrático medio (MSE)
+\vspace{- 3 mm} 
+\begin{equation}
+MSE = \frac{1}{n}\sum\limits_{i = 1}^m(y_i - \hat{y}_i)^2
+\end{equation}
+donde se compararán los perfiles medidos para RTP con los obtenidos de la PINN. A partir de una tolerancia en la pérdida, estabilidad del entrenamiento, comparación del perfil radial, error relativo y comportamiento físico (monotonía, regularidad) con los que se calibrarán los híper parámetros de la red. Aún se está valorando si la calibración será manual o se usará algún método como la interferencia bayesiana (BO).
+\vspace{- 5 mm}
 \subsection{Obtención de datos para comparar perfiles}
 A partir de $n(r)$ y $T(r)$ de la PINN se compararán con perfiles medidos para el dispositivo RTP en los disparos $\#96040237$, $\#97052261$ y $\#97053056$. Se promediarán temporalmente para obtener perfiles estacionario. Los datos serán obtenidos de la base de datos IMDB \cite{roach2008} usando MDSPlus \cite{stillerman1997}.
-
+\vspace{- 6 mm}
 \section{Cronograma}
-\vspace{-5mm}
+\vspace{-10mm}
 \begin{table}[h!]
 \caption{Cronograma de trabajo para el projecto de investigación.}
 \label{tab:cronograma}
-\resizebox{0.5\textwidth}{!}{
+\resizebox{0.45\textwidth}{!}{
 \begin{tabular}{|l|l|}
 \hline
 \textbf{Semana}          & \textbf{Actividad}                                                                                                \\ \hline
@@ -311,8 +317,9 @@ A partir de $n(r)$ y $T(r)$ de la PINN se compararán con perfiles medidos para 
 06 - 10 de Julio         & \begin{tabular}[c]{@{}l@{}}Trabajar en la presentación y póster/ \\ Correcciones en el informe final\end{tabular} \\ \hline
 \end{tabular}}
 \end{table}
-
+\vspace{- 6 mm}
 \section{Uso de inteligencia artificial}
+\vspace{- 3 mm}
 Se usó la LLM Claude para búsqueda bibliográfica, revisión ortográfica y estructural del texto. Se usará para \textit{debugging} de código.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -364,10 +371,9 @@ Se usó la LLM Claude para búsqueda bibliográfica, revisión ortográfica y es
 % Ahora añadimos el archivo fuente de la bobliografía(sin incluir el .bib)				% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\bibliography{sample-paper}
-
+\vspace{- 6.5 mm}
 \bibliography{references}
 \bibliographystyle{apsrev4-1}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
