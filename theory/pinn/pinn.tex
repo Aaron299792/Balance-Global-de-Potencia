@@ -28,7 +28,7 @@ definido en un dominio $\Omega \in \mathbb{R}^N$  con frontera $\partial\Omega$.
 Para minimizar la divergencia entre la predicción y la solución deseada, se construye una función de perdida basada en las ecuaciones del modelo físico en estudio, así como condiciones iniciales y de frontera. Se usa Diferenciación automática para calcular las derivadas parciales de $\hat{y}(x,t;\theta)$ respecto a los datos de entrada usados en la PDE. La función de perdida puede ser expresada por sumas pesadas de la norma $L_2$ del residuo de la PDE, condiciones de frontera y condiciones iniciales. La función general de perdida es entonces optimizada usando optimizados basados en gradientes, popularmente el \texttt{Adam} y el algoritmo \texttt{LBFGS}, para determinar el parámetro $\Theta$ que disminuye el error computacional.
 
 \begin{equation}
-	\mathcal{L}(\Theta) = \omega_f\mathcal{L}_f(\theta) + omega_{ic}\mathcal{L}_{ic}(\theta) + omega_{bc}\mathcal{L}_{bc}(\theta)
+	\mathcal{L}(\Theta) = \omega_f\mathcal{L}_f(\theta) + \omega_{ic}\mathcal{L}_{ic}(\theta) + \omega_{bc}\mathcal{L}_{bc}(\theta)
 \end{equation}
 
 con 
