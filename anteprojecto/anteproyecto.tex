@@ -118,36 +118,36 @@ nofootinbib]{revtex4}
 
 \section{Introducción} 
 
-El \textit{deep learning} se ha integrado a la física por su capacidad de representar funciones complejas y aprender estructuras de relaciones matemáticas \cite{carleo2019}. Dentro de estas, las redes neuronales (NNs) destacan por su capacidad para aproximar funciones postulándolas como una opción para la resolución de sistemas diferenciales \cite{lagaris1998}.  Las redes neuronales informadas por la física (PINNs) permiten tratar sistemas complejos de ecuaciones diferenciales usando restricciones físicas para obtener soluciones. Herramientas como la auto-diferenciación permiten introducir las ecuaciones diferenciales (EDs) y sus condiciones de frontera como funciones de penalización que restringen el espacio de soluciones y explotan la capacidad de aproximación de las NNs \cite{raissi2019, baydin2018}.
+El \textit{deep learning} se ha integrado en la física por su capacidad para representar funciones complejas y aprender estructuras de relaciones matemáticas \cite{carleo2019}. Dentro de estas, las redes neuronales (NNs) destacan por su capacidad para aproximar funciones, lo que las hace una opción para la resolución de sistemas diferenciales \cite{lagaris1998}.  Las redes neuronales informadas por la física (PINNs) permiten tratar sistemas complejos de ecuaciones diferenciales usando restricciones físicas para obtener soluciones. Herramientas como la autodiferenciación permiten introducir las ecuaciones diferenciales (EDs) y sus condiciones de frontera como funciones de penalización que restringen el espacio de soluciones y explotan la capacidad de aproximación de las NNs \cite{raissi2019, baydin2018}.
 
-En el campo de plasmas se presenta no linealidad y acoplamiento en las ecuaciones que lo rigen. La dinámica de los plasmas está influenciado por interacciones electromagnéticas \cite{helander2005}. Estos sistemas son complejos debido a su comportamiento colectivo y una dinámica con múltiples regímenes de colisión que llevan al transporte de partículas \cite{goldston1995}. La descripción de fluidos del plasma da un sistema cerrado de ecuaciones diferenciales parciales (PDEs) que puede ser modelado con  una teoría de transporte clásico \cite{freidberg2014}. Pese a que estos sistemas pueden ser reducidos a uno de ecuaciones diferenciales ordinarias (ODEs) con modelos 1D, siguen siendo complejos de tratar\cite{lechte2002, alves2018}.
+En el campo de plasmas se presenta no linealidad y acoplamiento en las ecuaciones que lo rigen. La dinámica de los plasmas está influenciada por interacciones electromagnéticas \cite{helander2005}. Estos sistemas son complejos debido a su comportamiento colectivo y una dinámica con múltiples regímenes de colisión que llevan al transporte de partículas \cite{goldston1995}. La descripción de fluidos del plasma da un sistema cerrado de ecuaciones diferenciales parciales (PDEs) que puede ser modelado con  una teoría de transporte clásico \cite{freidberg2014}. Pese a que estos sistemas pueden ser reducidos a uno de ecuaciones diferenciales ordinarias (ODEs) con modelos 1D, siguen siendo complejos de tratar\cite{lechte2002, alves2018}.
 
-Los coeficientes y los términos fuentes en los sistemas de EDs que aparecen en los modelos de transporte colisional no son constantes, además de no lineales, por lo que el uso de PINNs es un buen método por su capacidad de integrar y representar la no linealidad \cite{zhong2022}. Por ejemplo, se han implementado PINNs para la resolución de ecuaciones unidimensionales del transporte de plasma a bajas temperaturas\cite{zhong2022, trieschmann2023}. Esquemas de PINNs aplicados en el transporte en Tokamaks han sido comparados con métodos tradicionales de diferencias finitas en la resolución de PDEs con beneficios como reducción en el tiempo de convergencia \cite{seo2024}. En el transporte turbulento para encontrar campos consistentes con las ecuaciones del fluido doble de Braginskii \cite{mathews2021}. Sin embargo, no se ha reportado la implementación de una PINN aplicada al transporte perpendicular en geometría cilíndrica bajo el modelo de Braginskii reducido a ODEs con coeficientes dependientes de los perfiles.
+Los coeficientes y los términos fuentes en los sistemas de EDs que aparecen en los modelos de transporte colisional no son constantes, además de no lineales, por lo que el uso de PINNs es un buen método por su capacidad de integrar y representar la no linealidad \cite{zhong2022}. Por ejemplo, se han implementado PINNs para la resolución de ecuaciones unidimensionales del transporte de plasma a bajas temperaturas \cite{zhong2022, trieschmann2023}. Esquemas de PINNs aplicados en el transporte en Tokamaks han sido comparados con métodos tradicionales de diferencias finitas en la resolución de PDEs con beneficios como reducción en el tiempo de convergencia \cite{seo2024}. En el transporte turbulento para encontrar campos consistentes con las ecuaciones del fluido doble de Braginskii \cite{mathews2021}. Sin embargo, no se ha reportado la implementación de una PINN aplicada al transporte perpendicular en geometría cilíndrica bajo el modelo de Braginskii reducido a ODEs con coeficientes dependientes de los perfiles.
 
 No se ha reportado el uso de PINNs para el caso del transporte perpendicular para una geometría cilíndrica en la solución de las ecuaciones de fluido de Braginskii como un problema de ODEs con coeficientes dependientes de los perfiles. Las PINNs integran la no linealidad y la física al problema directamente en las funciones de pérdida usando la autodiferenciación (AD) sin uso de grillas. 
-\section{Pregunta de Investigación}
-La pregunta que se plantea contestar es, ¿puede una PINN, basada únicamente en restricciones físicas, reproducir perfiles radiales de densidad y temperatura en un plasma magnetizado bajo transporte clásico con un nivel de precisión comparable a datos experimentales del dispositive de fusión Rijnhuizen Tokamak Project (RTP)?
-\section{Objetivo General}
+\section{Pregunta de investigación}
+La pregunta que se plantea contestar es: ¿puede una PINN, basada únicamente en restricciones físicas, reproducir perfiles radiales de densidad y temperatura en un plasma magnetizado bajo transporte clásico con un nivel de precisión comparable a datos experimentales del dispositivo de fusión Rijnhuizen Tokamak Project (RTP)?
+\section{Objetivo general}
 Implementar una Red Neuronal Informada por la Física (PINN) para la determinación de los perfiles radiales de densidad electrónica y temperatura electrónica en un plasma magnetizado cilíndrico que exhibe transporte clásico perpendicular al campo magnético.
 \vspace{- 4 mm}
 \subsection*{Objetivos específicos}
 \vspace{- 4 mm}
 \begin{enumerate}[noitemsep]
 			\item Formular las ecuaciones que relacionan la densidad electrónica y temperatura electrónica a partir de la teoría de transporte clásico perpendicular al campo magnético para la base del diseño de la PINN.
-			\item Diseñar la arquitectura de la PINN de acuerdo al modelo teórico mediante la definición de las capas, las funciones de activación y los híper-parámetros esenciales de la red. 
+			\item Diseñar la arquitectura de la PINN de acuerdo al modelo teórico mediante la definición de las capas, las funciones de activación y los hiperparámetros esenciales de la red. 
 			\item  Evaluar cuantitativamente la precisión de la PINN mediante la comparación con perfiles experimentales del RTP utilizando métricas como error cuadrático medio (MSE) y análisis de consistencia física.
 		\end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-4 mm}
-\section{Marco Teórico}
+\section{Marco teórico}
 
-\subsection{Redes Neuronales Informadas por la física: fundamentos}
+\subsection{Redes neuronales informadas por la física: fundamentos}
 
 Las \textbf{neuronas} artificiales son funciones matemáticas y son la estructura básica de las NNs. Las neuronas se conectan entre sí usando capas que toman como argumentos vectores de salida de las capas previas. Los perceptrones multicapa (MLP) son una NN completamente conectada donde la información fluye únicamente de la capa de entrada a la capa de salida,  sin ciclos ni retroalimentación, i.e., $\mathcal{F} : X \rightarrow Y \quad \text{con} \quad \mathcal F = f^{(L)} \circ f^{(L-1)} \circ \dots \circ f^{(1)}$ con $X$ es el espacio de entradas y $Y$ el espacio de salidas. Cada capa aplica una transformación afín seguida de una activación no lineal por la función $\sigma(\cdot)$ que debe ser diferenciable.
 \begin{equation}
 	f^{(k)}(\bm{x}_{k-1})  = \sigma(\bm{W}^{(k)}\bm{x}_{k -1 } + \bm{b}^{(k)})
 \end{equation}
- donde $\bm{W}^{(k)}$ una matriz de pesos y  $\bm{b}^{(k)}$ el sesgo, son parámetros de la NN que se ajustan durante el entrenamiento. Una función general continua puede ser aproximada con precisión arbitraria usando MLPs \cite{cybenko1989, hornik1989}.
+ donde $\bm{W}^{(k)}$ es una matriz de pesos y  $\bm{b}^{(k)}$ el sesgo, son parámetros de la NN que se ajustan durante el entrenamiento. Una función general continua puede ser aproximada con precisión arbitraria usando MLPs \cite{cybenko1989, hornik1989}.
  
 En la Figura \ref{fig:mpl} se muestra el esquema general de lo que es un MLP.
 \begin{figure}[htb]
@@ -157,19 +157,19 @@ En la Figura \ref{fig:mpl} se muestra el esquema general de lo que es un MLP.
 	\label{fig:mpl}
 \end{figure}
 
-Las entradas, salidas y transformaciones en las NNs se guardan en tensores que almacenan los parámetros e híper-parámetros de la MLP, así como el grafo de computo de las operaciones sobre ellos y sus derivadas locales. Esto da paso al método AD que parte del principio de que toda operación computacional puede ser descompuesta en operaciones elementales con derivadas conocidas. La función de activación debe ser diferenciable en los puntos donde se aplica AD para evitar problemas con las derivadas.
+Las entradas, salidas y transformaciones en las NNs se guardan en tensores que almacenan los parámetros e hiperparámetros de la MLP, así como el grafo de cómputo de las operaciones sobre ellos y sus derivadas locales. Esto da paso al método AD que parte del principio de que toda operación computacional puede ser descompuesta en operaciones elementales con derivadas conocidas. La función de activación debe ser diferenciable en los puntos donde se aplica AD para evitar problemas con las derivadas.
 
-\subsubsection{Funciones de pérdida y PINNs}
+\subsubsection{Funciones de pérdida}
 
-Las funciones de pérdida $\mathcal{L}( \{x_i\}, \theta)$ cuantifican cuánto se apegan los modelos a las restricciones que se le imponen en determinados puntos $\{x_i\} \in X$  conocidos como  puntos de colocación. Durante el entrenamiento se minimiza $\mathcal{L}(\bm{\theta})$ al variar los parámetros internos del modelo $\bm{\theta} \coloneqq \{ \bm{ W}^{(k)}, \bm{b}^{(k)}\}$.  Las funciones $\mathcal{L}(\bm{\theta})$ pueden contener multiples términos correspondientes a diferentes condiciones sobre el modelo, si se imponen sobre las EDs que rigen un sistema físico y sus condiciones de frontera, surge el concepto de PINN \cite{raissi2019}.
+Las funciones de pérdida $\mathcal{L}( \{x_i\}, \theta)$ cuantifican cuánto se apegan los modelos a las restricciones que se les imponen en determinados puntos $\{x_i\} \in X$  conocidos como  puntos de colocación. Durante el entrenamiento se minimiza $\mathcal{L}(\bm{\theta})$ al variar los parámetros internos del modelo $\bm{\theta} \coloneqq \{ \bm{ W}^{(k)}, \bm{b}^{(k)}\}$.  Las funciones $\mathcal{L}(\bm{\theta})$ pueden contener múltiples términos correspondientes a diferentes condiciones sobre el modelo; si se imponen sobre las EDs que rigen un sistema físico y sus condiciones de frontera, surge el concepto de PINN \cite{raissi2019}.
 
-Las NNs requieren tanto de los parámetros $\bm{\theta}$ como de los híper-parámetros de la red $\bm{\Theta}$ que contienen el número de capas $L + 1$, el ancho de la red, la función de activación que se usa $\sigma$, etc. Una arquitectura de NN robusta requiere de una fase de entrenamiento donde se optimizan los valores de $\bm{\theta}$ dado un conjunto de $\bm{\Theta}$ fijos\cite{ray2023}.
+Las NNs requieren tanto de los parámetros $\bm{\theta}$ como de los hiperparámetros de la red $\bm{\Theta}$ que contienen el número de capas $L + 1$, el ancho de la red, la función de activación que se usa $\sigma$, etc. Una arquitectura de NN robusta requiere de una fase de entrenamiento donde se optimizan los valores de $\bm{\theta}$ dado un conjunto de $\bm{\Theta}$ fijos \cite{ray2023}.
 
 \subsubsection{Optimizadores}
 
-Los algoritmos de optimización modernos parten del algoritmo de descenso por gradiente (GD), donde se usa la dirección opuesta al gradiente de $\mathcal{L}(\bm{\theta})$ y un híper-parámetro llamado tasa de aprendizaje $\eta$ que es el tamaño del paso usado. Es la base de algoritmos más eficientes. 
+Los algoritmos de optimización modernos parten del algoritmo de descenso por gradiente (GD), donde se usa la dirección opuesta al gradiente de $\mathcal{L}(\bm{\theta})$ y un hiperparámetro llamado tasa de aprendizaje $\eta$ que es el tamaño del paso usado. Es la base de algoritmos más eficientes. 
 
-Los algoritmos basados en GD pueden desvanecerse o explotar. Esto se previene controlando la varianza de las señales que se pasan a la NN al inicializar los parámetros con valores aleatorios de una distribución uniforme o normal. El inicializador Xavier trata las derivadas de la función de perdida como variables aleatorias \cite{glorot2010}.
+Los algoritmos basados en GD pueden desvanecerse o explotar. Esto se previene controlando la varianza de las señales que se pasan a la NN al inicializar los parámetros con valores aleatorios de una distribución uniforme o normal. El inicializador Xavier trata las derivadas de la función de pérdida como variables aleatorias \cite{glorot2010}.
 
 El estimador adaptativo de momentos (Adam) está basado en gradientes estocásticos de primer orden donde las $\eta$ son adaptativas. Se introducen momentos que guardan el historial del gradiente $\nabla_{\bm{\theta}} \mathcal{L}$. El método es robusto para tratar problemas dispersos y con ruido \cite{kingma2017}.
 
@@ -178,9 +178,9 @@ El algoritmo de memoria limitada Broyden-Fletcher-Goldfarb-Shanno (L-BFGS) es un
 
 \subsection{Plasmas magnetizados y teoría clásica de transporte perpendicular}
 
-Un plasma es un gas ionizado que presenta comportamiento colectivo y cuasi-neutralidad. La dinámica del plasma está gobernada por interacciones electromagnéticas de largo alcance tanto por campos que se generan a nivel interno como por campos exteriores. La teoría de transporte colisional estudia el transporte de partículas, momento y energía  en un régimen dominado por colisiones. Cuando partículas, momento y energía se transportan en dirección perpendicular a un campo magnético establecido en el plasma se alude al concepto de transporte perpendicular. La teoría de transporte clásico estudia la contribución de las colisiones al transporte perpendicular en un plasma magnetizado \cite{helander2005}.
+Un plasma es un gas ionizado que presenta comportamiento colectivo y cuasi-neutralidad. La dinámica del plasma está gobernada por interacciones electromagnéticas de largo alcance tanto por campos que se generan a nivel interno como por campos exteriores. La teoría de transporte colisional estudia el transporte de partículas, momento y energía  en un régimen dominado por colisiones. Cuando partículas, momento y energía se transportan en dirección perpendicular a un campo magnético establecido en el plasma, se alude al concepto de transporte perpendicular. La teoría de transporte clásico estudia la contribución de las colisiones al transporte perpendicular en un plasma magnetizado \cite{helander2005}.
 
-\subsubsection{Ecuación Cinética de Boltzmann}
+\subsubsection{Ecuación cinética de Boltzmann}
 
 Una descripción estadística asume que hay suficientes partículas en el sistema para tener una descripción macroscópica con temperatura y densidad bien definidas. Se trabaja en un espacio de fase 6-dimensional $(\bm{x}, \bm{v})$. Primero se introduce el operador $d/dt $ como
 \begin{equation}
@@ -192,7 +192,7 @@ este operador toma en cuenta la evolución temporal local, la advección espacia
   \end{equation}
 en este caso $C_{\alpha, \beta}$ es un operador de colisiones binarias entre especies $\alpha$ y $\beta$ que describe colisiones que se dan en el medio.
 
-Al integrar la ecuación \eqref{eq:boltzmanngleichung} respecto al espacio de velocidades con pesos $g_k$ correctos se puede obtener la descripción de fluidos en el plasma al tomar los momentos $k=0$ y $k=2$. La ecuación \eqref{eq:partflux} describe el flujo de partículas de plasma a partir de $g_0$
+Al integrar la ecuación \eqref{eq:boltzmanngleichung} respecto al espacio de velocidades con pesos $g_k$ correctos, se puede obtener la descripción de fluidos en el plasma al tomar los momentos $k=0$ y $k=2$. La ecuación \eqref{eq:partflux} describe el flujo de partículas de plasma a partir de $g_0$
 \begin{equation}\label{eq:partflux}
 	\partial_t n_\alpha + \nabla\cdot\bm{\Gamma}_\alpha = S_\alpha
 \end{equation}
@@ -210,9 +210,9 @@ Los términos de fuente y sumideros en las ecuaciones \eqref{eq:partflux} y \eqr
 	P_\text{proceso} &=& E_\text{proceso} n_\alpha n_\beta \langle \sigma v \rangle_\text{proceso} 
 \end{eqnarray}
 
-donde $\sigma$ es la sección efectiva de la colisión. Los términos de fuente y sumidero de partículas así como la energía dependen de $\langle \sigma v\rangle$ la tasa a la cual ocurren las colisiones que dan lugar al proceso atómico.  
+donde $\sigma$ es la sección efectiva de la colisión. Los términos de fuente y sumidero de partículas así como la energía dependen de $\langle \sigma v\rangle$, la tasa a la cual ocurren las colisiones que dan lugar al proceso atómico.  
 
-\subsubsection{Procesos de calentamiento en el Plasma}
+\subsubsection{Procesos de calentamiento en el plasma}
 
 En los procesos de calentamiento se debe considerar el esfuerzo viscoso en el plasma $\bm{\Pi}_\alpha$ y la presión mecánica $p_\alpha$. El flujo de calor $\bm{Q}_\alpha$ puede dividirse en diferentes contribuciones tal que
 
@@ -224,7 +224,7 @@ En los procesos de calentamiento se debe considerar el esfuerzo viscoso en el pl
  
  \subsubsection{Parámetros característicos del plasma}
  
- El radio de Debye $\lambda_D = \sqrt{\epsilon_0 T / n_e e^2}$ es una distancia en la que el potencial de Coulomb se ve apantallado por comportamiento colectivo de las partículas. Con $\lambda_D$ y el parámetro de impacto mínimo $b_\text{min}$ se define la cantidad $\Lambda \equiv \lambda_D/ b_\text{min} = 4\pi \epsilon^{3/2} e^{-3} T_e^{3/2} n_e^{-1/2}$ \cite{goldston1995, helander2005}. Se define el tiempo de relajación $\tau_{\alpha, \beta}$ que es el periodo típico entre colisiones electrónicas
+ El radio de Debye $\lambda_D = \sqrt{\epsilon_0 T / n_e e^2}$ es una distancia en la que el potencial de Coulomb se ve apantallado por el comportamiento colectivo de las partículas. Con $\lambda_D$ y el parámetro de impacto mínimo $b_\text{min}$ se define la cantidad $\Lambda \equiv \lambda_D/ b_\text{min} = 4\pi \epsilon^{3/2} e^{-3} T_e^{3/2} n_e^{-1/2}$ \cite{goldston1995, helander2005}. Se define el tiempo de relajación $\tau_{\alpha, \beta}$ que es el periodo típico entre colisiones electrónicas
 \begin{equation*}
 	\tau_{e, i}^{-1} = \left(\frac{e^2}{4\pi\epsilon_0}\right)^2 \frac{8\sqrt{2\pi m_e n_e}}{3 m_i}\frac{\ln{\Lambda}}{T_e^{3/2}}
 \end{equation*}
@@ -264,8 +264,8 @@ A partir de ahora se omitirá la etiqueta $\alpha$ que caracteriza la especie. S
 \end{equation}
 
 donde $\lambda_n$ y $\lambda_T$ son las escalas características de decaimiento en $r = R$ y con $\bm{\Psi} = \{R, B, n_0, P_\text{ext}, \lambda_n, \lambda_T, \mu, \sigma\}$ el conjunto de parámetros libres del sistema. $R$, el radio del plasma cilíndrico. Las condiciones en $r = 0$ corresponden a la simetría axial del sistema. El orden dos es de esperar por las ecuaciones \eqref{eq:diffusion}
-\subsection{Implementación de la PINN}
-Se construirá una MLP inicializada con Xavier activada por una función $\tanh$. Consistirá de una capa de entrada $r$, múltiples capas ocultas $L$ y una capa de salida con dos neuronas $[\hat{n}(r; \bm{\theta}), \hat{T}(r; \bm{\theta})]$ en Python usando PyTorch \cite{pytorch} para construir la PINN. Se entrenará con GPUs del clúster de la Universidad de Costa Rica. Las funciones de pérdida serán puramente físicas de la forma \cite{raissi2019}:
+\subsection{Implementación de la red}
+Se construirá una MLP inicializada con Xavier activada por una función $\tanh$. Consistirá en una capa de entrada $r$, múltiples capas ocultas $L$ y una capa de salida con dos neuronas $[\hat{n}(r; \bm{\theta}), \hat{T}(r; \bm{\theta})]$ en Python usando PyTorch \cite{pytorch} para construir la PINN. Se entrenará con GPUs del clúster de la Universidad de Costa Rica. Las funciones de pérdida serán puramente físicas de la forma \cite{raissi2019}:
 \begin{equation}
 	\mathcal{L}(r; \bm{\theta}) = \omega_\mathcal{N} \mathcal{L}_\mathcal{N} (r; \bm{\theta})+ \omega_{bc} \mathcal{L}_{bc}(r; \bm{\theta})
 \end{equation}
@@ -279,7 +279,7 @@ aquí $N_i$ y $\omega_i$ son los puntos de colocación y pesos  para las funcion
 
 Para optimizar los parámetros PINN se usará el esquema de dos optimizadores. Una primera optimización con Adam seguida de un refinamiento usando L-BFGS.
 
-Dentro de \eqref{eq:odesys} aparecen términos de disipación de energía y partículas relacionadas con las tasas $\langle \sigma v \rangle$, estas dependen de la temperatura y se determinan numéricamente de la base de datos ADAS con la librería \textit{Cherab v1.5} \cite{cherab} para un gas de Hidrógeno usado en los disparos elegidos del tokamak RTP.
+Dentro de \eqref{eq:odesys} aparecen términos de disipación de energía y partículas relacionadas con las tasas $\langle \sigma v \rangle$, estas dependen de la temperatura y se determinan numéricamente de la base de datos ADAS con la librería \textit{Cherab v1.5} \cite{cherab} para un gas de hidrógeno usado en los disparos elegidos del tokamak RTP.
 \vspace{- 5 mm}
 \subsubsection{Críterio de convergencia}
 \vspace{- 2 mm}
@@ -288,27 +288,27 @@ Se utilizará como métrica principal el error cuadrático medio (MSE)
 \begin{equation}
 MSE = \frac{1}{n}\sum\limits_{i = 1}^m(y_i - \hat{y}_i)^2
 \end{equation}
-donde se compararán los perfiles medidos para RTP con los obtenidos de la PINN. A partir de una tolerancia en la pérdida, estabilidad del entrenamiento, comparación del perfil radial, error relativo y comportamiento físico (monotonía, regularidad) con los que se calibrarán los híper parámetros de la red. Aún se está valorando si la calibración será manual o se usará algún método como la interferencia bayesiana.
+donde se compararán los perfiles medidos para RTP con los obtenidos de la PINN. A partir de una tolerancia en la pérdida, estabilidad del entrenamiento, comparación del perfil radial, error relativo y comportamiento físico (monotonía, regularidad) con los que se calibrarán los hiperparámetros de la red. Aún se está valorando si la calibración será manual o se usará algún método como la interferencia bayesiana.
 \vspace{- 5 mm}
 \subsection{Obtención de datos para comparar perfiles}
-A partir de $n(r)$ y $T(r)$ de la PINN se compararán con perfiles medidos para el dispositivo RTP en los disparos $\#96040237$, $\#97052261$ y $\#97053056$. Se promediarán temporalmente para obtener perfiles estacionario. Los datos serán obtenidos de la base de datos IMDB \cite{roach2008} usando MDSPlus \cite{stillerman1997}.
+A partir de $n(r)$ y $T(r)$ de la PINN se compararán con perfiles medidos para el dispositivo RTP en los disparos $\#96040237$, $\#97052261$ y $\#97053056$. Se promediarán temporalmente para obtener perfiles estacionarios. Los datos serán obtenidos de la base de datos IMDB \cite{roach2008} usando MDSPlus \cite{stillerman1997}.
 \vspace{- 6 mm}
 \section{Cronograma}
 \vspace{-10mm}
 \begin{table}[h!]
-\caption{Cronograma de trabajo para el projecto de investigación.}
+\caption{Cronograma de trabajo para el proyecto de investigación.}
 \label{tab:cronograma}
 \resizebox{0.45\textwidth}{!}{
 \begin{tabular}{|l|l|}
 \hline
 \textbf{Semana}          & \textbf{Actividad}                                                                                                \\ \hline
-09 - 27 de Marzo & \begin{tabular}[c]{@{}l@{}}Revisión bibliográfica / Escritura de Anteproyecto / \\ Derivación de las ecuaciones del modelo\end{tabular}      \\ \hline
-06 - 10 de Abril         & Entrenamiento en la implementación de PINNs                                                                       \\ \hline
-13 de Abril - 01 de Mayo & \begin{tabular}[c]{@{}l@{}}Redacción del Avance /\\ construir la arquitectura de la PINN\end{tabular}             \\ \hline
-04 - 15 de Mayo          & \begin{tabular}[c]{@{}l@{}}Redacción del Avance / \\ Probar y Ajustar la PINN/\end{tabular}                       \\ \hline
-15 - 22 de Mayo  & \begin{tabular}[c]{@{}l@{}}Terminar Avance / obtener y definir los perfiles a usar  \\ de la base de datos/ Trabajar en la PINN\end{tabular} \\ \hline
-22 de Mayo - 12 de Junio & \begin{tabular}[c]{@{}l@{}}Comparar resultados de la PINN con \\ perfiles de la base de datos.\end{tabular}       \\ \hline
-15 - 03 de Junio         & \begin{tabular}[c]{@{}l@{}}Redacción del Informe Final / \\ Análisis de resultados\end{tabular}                   \\ \hline
+09 - 27 de marzo & \begin{tabular}[c]{@{}l@{}}Revisión bibliográfica / Escritura de Anteproyecto / \\ Derivación de las ecuaciones del modelo\end{tabular}      \\ \hline
+06 - 10 de abril         & Entrenamiento en la implementación de PINNs                                                                       \\ \hline
+13 de abril - 01 de mayo & \begin{tabular}[c]{@{}l@{}}Redacción del Avance /\\ construir la arquitectura de la PINN\end{tabular}             \\ \hline
+04 - 15 de mayo          & \begin{tabular}[c]{@{}l@{}}Redacción del Avance / \\ Probar y Ajustar la PINN/\end{tabular}                       \\ \hline
+15 - 22 de mayo  & \begin{tabular}[c]{@{}l@{}}Terminar Avance / obtener y definir los perfiles a usar  \\ de la base de datos/ Trabajar en la PINN\end{tabular} \\ \hline
+22 de mayo - 12 de junio & \begin{tabular}[c]{@{}l@{}}Comparar resultados de la PINN con \\ perfiles de la base de datos.\end{tabular}       \\ \hline
+15 - 03 de junio         & \begin{tabular}[c]{@{}l@{}}Redacción del Informe Final / \\ Análisis de resultados\end{tabular}                   \\ \hline
 06 - 10 de Julio         & \begin{tabular}[c]{@{}l@{}}Trabajar en la presentación y póster/ \\ Correcciones en el informe final\end{tabular} \\ \hline
 \end{tabular}}
 \end{table}
@@ -366,7 +366,6 @@ Se usó la LLM Claude para búsqueda bibliográfica, revisión ortográfica y es
 % Ahora añadimos el archivo fuente de la bobliografía(sin incluir el .bib)				% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\bibliography{sample-paper}
-\vspace{- 6.5 mm}
 \bibliography{references}
 \bibliographystyle{apsrev4-1}
 
