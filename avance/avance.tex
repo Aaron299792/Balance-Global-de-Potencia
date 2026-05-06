@@ -1,0 +1,184 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Plantilla para el Avance del curso FS0751/FS0624		%					
+% RECOMENDACIÓN: hagan una copia de la plantilla para sus trabajos.																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+% PREÁMBULO												%
+% El preámbulo en un documento LaTeX es el conjunto de comandos que preceden 			%
+% la línea \begin{document} line. Contiene la línea \documentclass para cargar			%
+% las definiciones REVTeK-4 y varias otras líneas \usepackage para cargar				%
+% otros paquetes.																		%
+%																						%
+% ADVERTENCIA A LOS ESTUDIANTES: El preámbulo contiene un conjunto de paquetes necesarios para un compilado apropiado. Se recomienda no eliminar paquetes por completo aunque piense que no los necesita, coméntelos. Ud puede también agregar paquetes según lo vea conveniente.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[aps,twocolumn,secnumarabic,nobalancelastpage,amsmath,amssymb,
+nofootinbib]{revtex4}
+
+% nofootinbib es otra clase de documento que permite colocar notas al pie de
+% página en la página donde ocurre, en lugar de al final del artículo. De esta
+% manera es más fácil de leer!
+
+% secnumarabic es una manera particular de identificar la secciones por número.
+% para ayudar a la revisión electrónica.
+
+% amsmath and amssymb son necesarias para el ambiente de las subecuaciones, 
+% entre otras
+
+\usepackage{graphics}      % especificaciones gráficas estándar
+\usepackage{graphicx}      % especificaciones alternativas para lso gráficos
+\usepackage{longtable}     % ayuda con las opciones de tablas grandes
+\usepackage{url}           % para referencias en línea
+\usepackage{bm}            % paquete especial 'bold-math'
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}% para que utilice las reglas gramaticales del español
+						   % y reconozca las tildes.						   
+\usepackage[letterpaper,top= 2.75cm,bottom=3.5cm,left=1.8cm,right=1.8cm]{geometry}%margenes
+\usepackage{ifsym}                        %Símbolos matemáticos
+\usepackage{amssymb}                      %AMS
+\usepackage{amsmath}                      %AMS
+\usepackage{amsthm}                       %AMS teorema
+\usepackage{color}                        %LaTex Color
+
+%\usepackage{multicol}                     %Permite escribir en columnas
+%\usepackage{multirow}                                                   %Permite escribir en filas
+\usepackage{multienum}                    %Permite colocar una lista en columnas
+\usepackage{tabularx}                     %Permite generar tabuladores con ancho ajustables
+\usepackage{booktabs}                     %Características especiales para tablas
+%\usepackage{caption}    
+
+%Cambia los caption
+\usepackage{fancyhdr}
+\usepackage{pgf}
+\usepackage{tikz}
+\tikzstyle{guiones}+=[dashed]
+\usetikzlibrary{patterns,arrows,snakes,shapes,automata,plotmarks,backgrounds}
+\usepackage{lscape}
+\usepackage{titlesec}
+\usepackage{array,ragged2e}
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\usepackage{float}
+\setlength{\columnsep}{7.5mm} 
+
+\titleformat*{\section}{\normalsize\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}			   						   
+\def\bibsection{\section*{\refname}} 
+\usepackage[pdfborder={0 0 0},colorlinks=false]{hyperref}
+\usepackage{xurl} %Paquete para poder incluir enlaces largos de url en las referencias.
+\usepackage{adjustbox}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+%                                 		%
+% Y ahora, el comienzo del documento... %
+%                                 		%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Acá se ponen los logos institucionales para la primer página del reporte.
+{\begin{center}
+\vskip-25pt 
+{\includegraphics[width = 175mm]{LogosInstitucionales.png}}
+\end{center}}
+
+% Título de la práctica, nombre, apellidos, carnet y correo de las personas involucradas
+\title			{Implementación de una red neuronal informada por la Física para la obtención de perfiles de densidad y temperatura en un plasma que presenta transporte clásico} %sólo modificar el nombre según corresponda
+\author         {Aaron Sanabria Martínez}
+\email          {usuario.institucional@ucr.ac.cr}
+\author         {Ricardo Solano Piedra}
+\email          {usuario.institucional@ucr.ac.cr}
+\affiliation    {Escuela de Física, Universidad de Costa Rica. Sede Rodrigo Facio} % así como otra afiliación que pueda tener la persona supervisora
+\affiliation    {Escuela de Física, Instituto Tecnológico de Costa Rica. Campus Cartago}
+\date{\today} %la fecha sale de forma automática
+
+\maketitle %este comando introduce el título, nombres y afiliaciones.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cada sección empieza con el comando: \section{título} 								pregunta de investigación y objetivos actualizados (en caso de haber recibido retroalimentación), bitácora (descripción de las actividades semanales realizadas), resultados preliminares (tablas, esquemas, fotos o gráficas junto con una descripción y discusión breve), problemáticas (mencionando imprevistos así como las soluciones contempladas), y un cronograma actualizado
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pregunta de Investigación}
+
+La pregunta que se plantea contestar es: ¿puede una
+PINN, basada únicamente en restricciones físicas, reproducir perfiles radiales de densidad y temperatura en un plasma magnetizado bajo transporte clásico con un nivel
+de precisión comparable a datos experimentales del dispositivo de fusión Rijnhuizen Tokamak Project (RTP)?
+
+\section{Objetivos}
+
+\subsection*{Objetivo general}
+Implementar una Red Neuronal Informada por la Física (PINN) para la determinación de los perfiles radiales de densidad electrónica y temperatura electrónica en un plasma magnetizado cilíndrico que exhibe transporte clásico perpendicular al campo magnético.
+
+\subsection*{Objetivos específicos}
+
+	\begin{enumerate}
+		\item Formular las ecuaciones que relacionan la densidad electrónica y temperatura electrónica a partir de la teoría de transporte clásico perpendicular al campo magnético para la base del diseño de la PINN.
+		\item Diseñar la arquitectura de la PINN de acuerdo al modelo teórico mediante la definición de las capas, las funciones de activación y los hiperparámetros esenciales de la red. 
+		\item  Evaluar cuantitativamente la precisión de la PINN mediante la comparación con perfiles experimentales del RTP utilizando métricas como error cuadrático medio (MSE) y análisis de consistencia física.
+	\end{enumerate}
+
+
+\section{Bitácora de trabajo}
+
+Acá reportan, en breve, las actividades realizadas semana a semana hasta el momento. Desde reuniones, revisión bibliográfica, búsqueda de materiales, entrenamientos o capacitaciones en equipos de medición o herramientas computacionales, procesamiento de bases de datos, fabricación de muestras, construcción del experimento, giras, mediciones de laboratorio, análisis, en fin, la idea es que reflejen en lo que han hecho y puedan llevar un control del plan inicial planteado. Si desde que empezó el proyecto han llevado su propio registro de actividades entonces esta sección es algo que no debería consumirles mucho tiempo.\\
+
+Ejemplos (Uds. incluyen todas las semanas del semestre): \\
+
+\textbf{Semana 1}: reunión con supervisor y sesión introductoria del curso. Se empezó la búsqueda bibliográfica.\\
+
+\textbf{Semana 4}: se trabajó en la confección del anteproyecto. Se realizó una reunión con mi supervisor para recibir retroalimentación. Además, se empezó a desarrollar el script para realizar el filtrado de las señales a medir.\\ 
+
+\textbf{Semana 5}: por motivo de exámenes no se asistió al laboratorio en ésta semana. Mi supervisor estuvo informado y me dió el visto bueno. Apliqué las correcciones a mi anteproyecto. \\
+
+\textbf{Semana 8}: se realizaron las primeras mediciones con las muestras fabricadas la semana anterior. Se obtuvieron mediciones de la amplitud de las deformaciones en función de la temperatura. \\
+
+Para los estudiantes que traen un IC del semestre anterior, en el avance que entregan cuando los demás entregan su Anteproyecto, no tienen que describir semana a semana lo que realizaron en el periodo entre semestres. En su lugar, lo que ponen primero es 1-2 párrafos que describan por un lado en que consiste su proyecto, el estado de éste al momento de solicitar el inconcluso, y un resumen de las actividades que han realizado durante el ciclo de verano. Lo anterior con el fin de poner al coordinador al tanto sobre su proyecto. Y seguido, continúan la dinámica de describir las actividades semanales como se describió arriba.
+
+\section{Resultados preliminares}
+
+Acá presentan los resultados que llevan de momento, estos pueden ser en la forma de tablas, gráficas, fotografías, esquemas, protocolos, o lo que aplique según la naturaleza del proyecto. Cada resultado debe venir con una descripción concisa de cómo se obtuvo y pueden incluir una discusión breve (opcional). Es importante que las tablas y figuras tengan una presentación de calidad, y procuren en la medida de lo posible sintetizar bien los resultados, es decir, si realizan 20 mediciones de un fenómeno, no se espera que incluyan 20 gráficas similares, sino que describen que realizar N mediciones, pero incluyen solamente una gráfica representativa (o compuesta) y/o una figura que contemple un análisis compacto de las mediciones.
+
+\section{Problemáticas}
+
+Acá pueden describir cualquier imprevisto o problemática que hayan tenido en el desarrollo del proyecto y mencionar cómo se solucionó o se van a tomar acciones correctivas. En caso de haber algo que está atrasando el proyecto es importante que lo mencionen desde el primer momento al coordinador para ver cómo se les puede ayudar. 
+
+\section{Cronograma}
+
+Incluyen un cronograma actualizado de las semanas pendientes del semestre. 
+
+\section{Referencias} %Este comando de sección como tal lo tienen que borrar en su documento (el título de Referencias sale automáticamento con el comando de bibliography
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Se puede citar un libro o un artículo con el comando: \cite{referencia}.
+% Las referencias serán definidas en la bibliografía al final de este archivo .tex, en este plantilla está como sample-paper.bib															
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+En el avance las referencias son necesarias si por ejemplo quieren especificar referencias que estudiaron durante la primer parte del semestre o si son relevantes para los resultados preliminares que están reportando. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ahora añadimos el archivo fuente de la bobliografía(sin incluir el .bib)				% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\bibliography{sample-paper}
+
+\bibliography{sample-paper}
+\bibliographystyle{apsrev4-1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Otra manera de poner la bibliografía:													%
+%																						%
+%\bibliographystyle{prsty}																%
+%\begin{thebibliography}{99}															%
+%\bibitem{melissinos1966}Melissinos, A.C., Experiments in Modern						%
+%  Physics - 1st Edition, Academic Press,  [1966]										%
+%\bibitem{melissinos2003}Melissinos, A.C., Napolitano, J.,  Experiments in Modern		%
+%  Physics - 2nd Edition, Academic Press,  [2003]										%
+%\bibitem{bevington2003}Bevington and Robinson, Data Reduction and						%
+%  Error Analysis for the Physical Sciences - 3rd Edition, McGraw-Hill,					%
+%  [2003]																				%
+%\bibitem{pritchard1990}Professor D. Pritchard, Personal Communication					%
+%\end{thebibliography}																	%
+																						%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\appendix
+
+
+\end{document}
