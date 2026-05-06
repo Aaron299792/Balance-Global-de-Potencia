@@ -1,14 +1,16 @@
 import torch
+from cherab.core.atomic import hydrogen
+from cherab.openadas.parse.adf11 import parse_adf11
 import numpy as np
 from scipy.interpolate import RegularGridInterpolator
 
 
 class RateCoeff2D:
-    def __init__(self, file, dtype=torch.float64, device="cpu", Nn=200, Nt=200):
+    def __init__(self, file, gas, n_max, T_max, dtype=torch.float64, device="cpu", Nn=200, Nt=200):
         self.dtype = dtype
         self.device = device
 
-        self.data = self._read_adf11(file)
+        self.data = parse_adf11(gas, file)
 
         lden = self._extract_data('ne')
         ltemp = self._extract_data('te')
@@ -23,9 +25,27 @@ class RateCoeff2D:
         pts = np.column_stack((X.ravel(), Y.ravel()))
         lr = interp(pts).reshape(Nn, Nt)
 
-        self.ln = torch.as_tensor(ln, dtype=dtype, device=device)
-        self.lt = torch.as_tensor(lt, dtype=dtype, device=device)
-        self.lr = torch.as_tensor(lr, dtype=dtype, device=device)
+        self.ln = torch.as_tensor(ln, dtype=torch.float64, device=self.device)
+        self.lt = torch.as_tensor(lt, dtype=torch.float64, device=self.device)
+        self.lr = torch.as_tensor(lr, dtype=torch.float64, device=self.device)
+        self.n_max = n_max
+        self.T_max = T_max
+
+    def _extract_data(self, value):
+        """
+        helper internal function.It finds and extracts the data from the recursive dictionary return by parse_adf11
+
+        Arguments:
+        -------------------------------------------------------------------------
+            value: str,
+                could be 'ne': density, 'te': temperature, 'rates': rates.
+
+        Return:
+            out: n_array,
+                returns an array that contains the value extracted from the adf11 file.
+        """
+        key = list(self.data.keys())[0]
+        return np.array(self.data[key][1][value], dtype=np.float64)
 
     def _bilinear(self, lnq, ltq):
         shape = lnq.shape
@@ -58,7 +78,9 @@ class RateCoeff2D:
 
         return out.reshape(shape)
 
-    def rate(self, ne, Te):i #De momento no trabaja para T y n normalizado, tengo que corregir
+    def rate(self, n_norm, T_norm): #De momento no trabaja para T y n normalizado, tengo que corregir
+        ne = n_norm * self.n_max
+        Te = T_norm * self.T_max
         lnq = torch.log10(ne)
         ltq = torch.log10(Te)
 

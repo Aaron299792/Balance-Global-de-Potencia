@@ -111,4 +111,4 @@ class sigmav:
         lT = torch.log10(T)
         lrate = self._interp_lrate(lT)
         lrate_ref = self._interp_lrate(self.ltmax)
-        return 10 ** (lrate - lrate_ref)
+        return 10 ** lrate
